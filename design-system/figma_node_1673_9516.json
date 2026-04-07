@@ -1,0 +1,368 @@
+﻿{
+    "name":  "梨谱 App UX",
+    "lastModified":  "2026-04-02T11:49:25Z",
+    "thumbnailUrl":  "https://s3-alpha.figma.com/thumbnails/83dda5fc-bf2f-4100-812e-45a838e27ebf?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAQ4GOSFWC7U5UDNUM%2F20260402%2Fus-west-2%2Fs3%2Faws4_request\u0026X-Amz-Date=20260402T000000Z\u0026X-Amz-Expires=604800\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=55e5fe16e3a16b9e083cd906bbec1cc88553232ea19f452fb5001fcdda2e2141",
+    "version":  "2337824649986547377",
+    "role":  "owner",
+    "editorType":  "figma",
+    "linkAccess":  "view",
+    "nodes":  {
+                  "1673:9516":  {
+                                    "document":  {
+                                                     "id":  "1673:9516",
+                                                     "name":  "场景一：预置任务推荐",
+                                                     "type":  "FRAME",
+                                                     "scrollBehavior":  "SCROLLS",
+                                                     "boundVariables":  {
+                                                                            "fills":  [
+                                                                                          "@{type=VARIABLE_ALIAS; id=VariableID:634e53795243c8ea0361186815fc22b405c4c817/17636:113}"
+                                                                                      ]
+                                                                        },
+                                                     "children":  [
+                                                                      {
+                                                                          "id":  "1673:9517",
+                                                                          "name":  "BG",
+                                                                          "type":  "INSTANCE",
+                                                                          "scrollBehavior":  "SCROLLS",
+                                                                          "componentId":  "1097:4305",
+                                                                          "componentProperties":  "@{Property 1=}",
+                                                                          "overrides":  "",
+                                                                          "children":  "",
+                                                                          "blendMode":  "PASS_THROUGH",
+                                                                          "clipsContent":  true,
+                                                                          "background":  "",
+                                                                          "fills":  "",
+                                                                          "strokes":  "",
+                                                                          "strokeWeight":  1.0,
+                                                                          "strokeAlign":  "INSIDE",
+                                                                          "backgroundColor":  "@{r=0.0; g=0.0; b=0.0; a=0.0}",
+                                                                          "absoluteBoundingBox":  "@{x=-935.60156250; y=-654.0; width=394.20223999023438; height=852.0}",
+                                                                          "absoluteRenderBounds":  "@{x=-935.0; y=-654.0; width=393.0; height=852.0}",
+                                                                          "preserveRatio":  true,
+                                                                          "targetAspectRatio":  "@{x=874.0; y=1889.0}",
+                                                                          "constraints":  "@{vertical=TOP; horizontal=CENTER}",
+                                                                          "effects":  "",
+                                                                          "interactions":  "",
+                                                                          "complexStrokeProperties":  "@{strokeType=BASIC}"
+                                                                      },
+                                                                      {
+                                                                          "id":  "1673:9518",
+                                                                          "name":  "文字页对话气泡",
+                                                                          "type":  "FRAME",
+                                                                          "scrollBehavior":  "SCROLLS",
+                                                                          "children":  "      ",
+                                                                          "blendMode":  "PASS_THROUGH",
+                                                                          "clipsContent":  true,
+                                                                          "background":  "",
+                                                                          "fills":  "",
+                                                                          "strokes":  "",
+                                                                          "strokeWeight":  1.0,
+                                                                          "strokeAlign":  "INSIDE",
+                                                                          "backgroundColor":  "@{r=0.0; g=0.0; b=0.0; a=0.0}",
+                                                                          "layoutMode":  "VERTICAL",
+                                                                          "counterAxisSizingMode":  "FIXED",
+                                                                          "primaryAxisSizingMode":  "FIXED",
+                                                                          "paddingLeft":  16.0,
+                                                                          "paddingRight":  16.0,
+                                                                          "paddingTop":  34.0,
+                                                                          "paddingBottom":  34.0,
+                                                                          "itemSpacing":  12.0,
+                                                                          "layoutWrap":  "NO_WRAP",
+                                                                          "absoluteBoundingBox":  "@{x=-871.0; y=-654.0; width=329.0; height=976.0}",
+                                                                          "absoluteRenderBounds":  "@{x=-871.0; y=-654.0; width=329.0; height=976.0}",
+                                                                          "constraints":  "@{vertical=TOP; horizontal=RIGHT}",
+                                                                          "layoutSizingHorizontal":  "FIXED",
+                                                                          "layoutSizingVertical":  "FIXED",
+                                                                          "effects":  "",
+                                                                          "interactions":  "",
+                                                                          "complexStrokeProperties":  "@{strokeType=BASIC}"
+                                                                      },
+                                                                      {
+                                                                          "id":  "1673:9586",
+                                                                          "name":  "Top Bar",
+                                                                          "type":  "INSTANCE",
+                                                                          "scrollBehavior":  "SCROLLS",
+                                                                          "componentId":  "1575:7814",
+                                                                          "componentProperties":  "@{bg#7436:0=; text btn#6340:4=; Text#6340:3=; title#6340:2=; close#6340:1=; back#6340:0=; Property 1=}",
+                                                                          "overrides":  " ",
+                                                                          "children":  "   ",
+                                                                          "blendMode":  "PASS_THROUGH",
+                                                                          "clipsContent":  false,
+                                                                          "background":  "",
+                                                                          "fills":  "",
+                                                                          "strokes":  "",
+                                                                          "strokeWeight":  1.0,
+                                                                          "strokeAlign":  "INSIDE",
+                                                                          "backgroundColor":  "@{r=0.0; g=0.0; b=0.0; a=0.0}",
+                                                                          "layoutMode":  "VERTICAL",
+                                                                          "counterAxisSizingMode":  "FIXED",
+                                                                          "counterAxisAlignItems":  "MAX",
+                                                                          "primaryAxisAlignItems":  "CENTER",
+                                                                          "layoutWrap":  "NO_WRAP",
+                                                                          "absoluteBoundingBox":  "@{x=-935.0; y=-654.0; width=393.0; height=114.0}",
+                                                                          "absoluteRenderBounds":  "@{x=-935.0; y=-654.0; width=393.0; height=114.0}",
+                                                                          "constraints":  "@{vertical=TOP; horizontal=LEFT}",
+                                                                          "layoutSizingHorizontal":  "FIXED",
+                                                                          "layoutSizingVertical":  "HUG",
+                                                                          "effects":  "",
+                                                                          "interactions":  "",
+                                                                          "complexStrokeProperties":  "@{strokeType=BASIC}"
+                                                                      },
+                                                                      {
+                                                                          "id":  "1673:9587",
+                                                                          "name":  "Action Bar",
+                                                                          "type":  "INSTANCE",
+                                                                          "scrollBehavior":  "SCROLLS",
+                                                                          "componentId":  "1658:6897",
+                                                                          "componentProperties":  "@{Property 1=}",
+                                                                          "overrides":  " ",
+                                                                          "children":  "   ",
+                                                                          "blendMode":  "PASS_THROUGH",
+                                                                          "clipsContent":  false,
+                                                                          "background":  "",
+                                                                          "fills":  "",
+                                                                          "strokes":  "",
+                                                                          "strokeWeight":  1.0,
+                                                                          "strokeAlign":  "INSIDE",
+                                                                          "backgroundColor":  "@{r=0.0; g=0.0; b=0.0; a=0.0}",
+                                                                          "layoutMode":  "VERTICAL",
+                                                                          "counterAxisSizingMode":  "FIXED",
+                                                                          "counterAxisAlignItems":  "CENTER",
+                                                                          "primaryAxisAlignItems":  "MAX",
+                                                                          "paddingBottom":  36.0,
+                                                                          "layoutWrap":  "NO_WRAP",
+                                                                          "absoluteBoundingBox":  "@{x=-935.0; y=320.0; width=393.0; height=112.0}",
+                                                                          "absoluteRenderBounds":  "@{x=-935.0; y=272.0; width=393.0; height=160.0}",
+                                                                          "constraints":  "@{vertical=BOTTOM; horizontal=CENTER}",
+                                                                          "layoutSizingHorizontal":  "FIXED",
+                                                                          "layoutSizingVertical":  "HUG",
+                                                                          "effects":  "",
+                                                                          "interactions":  "",
+                                                                          "complexStrokeProperties":  "@{strokeType=BASIC}"
+                                                                      },
+                                                                      {
+                                                                          "id":  "1673:9588",
+                                                                          "name":  "Home Indicator",
+                                                                          "type":  "FRAME",
+                                                                          "scrollBehavior":  "SCROLLS",
+                                                                          "children":  "",
+                                                                          "blendMode":  "PASS_THROUGH",
+                                                                          "clipsContent":  false,
+                                                                          "background":  "",
+                                                                          "fills":  "",
+                                                                          "strokes":  "",
+                                                                          "strokeWeight":  1.0,
+                                                                          "strokeAlign":  "INSIDE",
+                                                                          "backgroundColor":  "@{r=0.0; g=0.0; b=0.0; a=0.0}",
+                                                                          "absoluteBoundingBox":  "@{x=-935.0; y=398.0; width=394.0; height=34.0}",
+                                                                          "absoluteRenderBounds":  "@{x=-935.0; y=398.0; width=393.0; height=34.0}",
+                                                                          "constraints":  "@{vertical=BOTTOM; horizontal=LEFT_RIGHT}",
+                                                                          "effects":  "",
+                                                                          "interactions":  "",
+                                                                          "complexStrokeProperties":  "@{strokeType=BASIC}"
+                                                                      }
+                                                                  ],
+                                                     "blendMode":  "PASS_THROUGH",
+                                                     "clipsContent":  true,
+                                                     "background":  [
+                                                                        {
+                                                                            "blendMode":  "NORMAL",
+                                                                            "type":  "SOLID",
+                                                                            "color":  "@{r=0.97254902124404907; g=0.96078431606292725; b=0.93725490570068359; a=1.0}",
+                                                                            "boundVariables":  "@{color=}"
+                                                                        }
+                                                                    ],
+                                                     "fills":  [
+                                                                   {
+                                                                       "blendMode":  "NORMAL",
+                                                                       "type":  "SOLID",
+                                                                       "color":  "@{r=0.97254902124404907; g=0.96078431606292725; b=0.93725490570068359; a=1.0}",
+                                                                       "boundVariables":  "@{color=}"
+                                                                   }
+                                                               ],
+                                                     "strokes":  [
+
+                                                                 ],
+                                                     "strokeWeight":  1.0479999780654907,
+                                                     "strokeAlign":  "INSIDE",
+                                                     "backgroundColor":  {
+                                                                             "r":  0.97254902124404907,
+                                                                             "g":  0.96078431606292725,
+                                                                             "b":  0.93725490570068359,
+                                                                             "a":  1.0
+                                                                         },
+                                                     "overflowDirection":  "VERTICAL_SCROLLING",
+                                                     "absoluteBoundingBox":  {
+                                                                                 "x":  -935.0,
+                                                                                 "y":  -654.0,
+                                                                                 "width":  393.0,
+                                                                                 "height":  1086.0
+                                                                             },
+                                                     "absoluteRenderBounds":  {
+                                                                                  "x":  -935.0,
+                                                                                  "y":  -654.0,
+                                                                                  "width":  393.0,
+                                                                                  "height":  1086.0
+                                                                              },
+                                                     "constraints":  {
+                                                                         "vertical":  "TOP",
+                                                                         "horizontal":  "LEFT"
+                                                                     },
+                                                     "effects":  [
+
+                                                                 ],
+                                                     "interactions":  [
+
+                                                                      ],
+                                                     "complexStrokeProperties":  {
+                                                                                     "strokeType":  "BASIC"
+                                                                                 }
+                                                 },
+                                    "components":  {
+                                                       "1097:4305":  {
+                                                                         "key":  "07a6fc5d34029e1a8093d5674e37d913a5ca9e81",
+                                                                         "name":  "Property 1=Bg",
+                                                                         "description":  "",
+                                                                         "remote":  true,
+                                                                         "componentSetId":  "1097:4300",
+                                                                         "documentationLinks":  [
+
+                                                                                                ]
+                                                                     },
+                                                       "1658:6809":  {
+                                                                         "key":  "37133af7c8d0279ac16959e5d76b2d87869d0f7f",
+                                                                         "name":  "Property 1=Photo",
+                                                                         "description":  "",
+                                                                         "remote":  true,
+                                                                         "componentSetId":  "1658:6808",
+                                                                         "documentationLinks":  [
+
+                                                                                                ]
+                                                                     },
+                                                       "1575:7814":  {
+                                                                         "key":  "0e119249b4c31678eb42bf17c4e3c7b7a222f98e",
+                                                                         "name":  "Property 1=chat",
+                                                                         "description":  "",
+                                                                         "remote":  true,
+                                                                         "componentSetId":  "1575:7813",
+                                                                         "documentationLinks":  [
+
+                                                                                                ]
+                                                                     },
+                                                       "1575:4065":  {
+                                                                         "key":  "25648590b824ee966c145dfe40ed57e3142d39be",
+                                                                         "name":  "BG",
+                                                                         "description":  "",
+                                                                         "remote":  true,
+                                                                         "documentationLinks":  [
+
+                                                                                                ]
+                                                                     },
+                                                       "775:1726":  {
+                                                                        "key":  "b753053836401e879337c3f76beefa0473744f02",
+                                                                        "name":  "Overlay",
+                                                                        "description":  "",
+                                                                        "remote":  true,
+                                                                        "documentationLinks":  [
+
+                                                                                               ]
+                                                                    },
+                                                       "1:131":  {
+                                                                     "key":  "889890fa5daff2e89b34a573272d244a79fe71a1",
+                                                                     "name":  "Background=False",
+                                                                     "description":  "",
+                                                                     "remote":  true,
+                                                                     "componentSetId":  "1:120",
+                                                                     "documentationLinks":  [
+
+                                                                                            ]
+                                                                 },
+                                                       "1658:6897":  {
+                                                                         "key":  "eb890b894be08cfa267fb90ecf9de28c729db571",
+                                                                         "name":  "Property 1=with bg",
+                                                                         "description":  "",
+                                                                         "remote":  true,
+                                                                         "componentSetId":  "1658:6896",
+                                                                         "documentationLinks":  [
+
+                                                                                                ]
+                                                                     },
+                                                       "1658:6902":  {
+                                                                         "key":  "2b7d104266d57775f0004fe6dffeb30a11474f50",
+                                                                         "name":  "Property 1=Default",
+                                                                         "description":  "",
+                                                                         "remote":  true,
+                                                                         "componentSetId":  "1658:6896",
+                                                                         "documentationLinks":  [
+
+                                                                                                ]
+                                                                     },
+                                                       "1254:2859":  {
+                                                                         "key":  "4211b8797d2b8158f416765699ad1957f9fc5ca5",
+                                                                         "name":  "isActived=True",
+                                                                         "description":  "",
+                                                                         "remote":  true,
+                                                                         "componentSetId":  "1254:2858",
+                                                                         "documentationLinks":  [
+
+                                                                                                ]
+                                                                     }
+                                                   },
+                                    "componentSets":  {
+                                                          "1097:4300":  {
+                                                                            "key":  "4541f16ec400b996879baa596cf86fea72eccb79",
+                                                                            "name":  "BG",
+                                                                            "description":  "",
+                                                                            "remote":  true
+                                                                        },
+                                                          "1658:6808":  {
+                                                                            "key":  "9fe7702594982552d1e8854e8a1e6a45a803ca10",
+                                                                            "name":  "Component 9",
+                                                                            "description":  "",
+                                                                            "remote":  true
+                                                                        },
+                                                          "1575:7813":  {
+                                                                            "key":  "32e8bf5de0dfe63ce705ca0d6e3dddfbadf62bf5",
+                                                                            "name":  "Top Bar",
+                                                                            "description":  "",
+                                                                            "remote":  true
+                                                                        },
+                                                          "1:120":  {
+                                                                        "key":  "a9b52333367e2109aa07d29b92f34e17bc26bacb",
+                                                                        "name":  "Status Bar - iPhone",
+                                                                        "description":  "",
+                                                                        "remote":  true
+                                                                    },
+                                                          "1658:6896":  {
+                                                                            "key":  "f02e65b1e79f2e475e3363838b49997473bca38b",
+                                                                            "name":  "Action Bar",
+                                                                            "description":  "",
+                                                                            "remote":  true
+                                                                        },
+                                                          "1254:2858":  {
+                                                                            "key":  "def0629e5de8224f084ecdd0d7d5e1d18aa66b64",
+                                                                            "name":  "Medium Button",
+                                                                            "description":  "",
+                                                                            "remote":  true
+                                                                        }
+                                                      },
+                                    "schemaVersion":  0,
+                                    "styles":  {
+                                                   "775:1722":  {
+                                                                    "key":  "71e91efbd4131f5096030ef981a4f6fd57fa62e3",
+                                                                    "name":  "San-Serif/Caption 1/Medium",
+                                                                    "styleType":  "TEXT",
+                                                                    "remote":  true,
+                                                                    "description":  ""
+                                                                },
+                                                   "1:2":  {
+                                                               "key":  "070e78e0ecf4e1e367cf7a3e06a4ac0b368114a2",
+                                                               "name":  "Backdrop blurs/backdrop-blur-md",
+                                                               "styleType":  "EFFECT",
+                                                               "remote":  true,
+                                                               "description":  "Backdrop blurs (or background blurs) allow you to add depth and realism to designs by positioning elements on a z-axis."
+                                                           }
+                                               }
+                                }
+              }
+}
