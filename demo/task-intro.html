@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>梨谱 · 种星星介绍 v4</title>
+<style>
+:root {
+  --bg: #F8F5EF;
+  --bg-component: #F9F9FC;
+  --primary: #7168D6;
+  --primary-lt: #EFEEFC;
+  --text-bubble: #282737;
+  --text-gray: #424245;
+  --text-hint: rgba(53, 46, 38, 0.2);
+  --font: "PingFang SC", -apple-system, "Noto Sans SC", sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body {
+  height: 100%; background: #E8E4DD;
+  font-family: var(--font); overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══ PHONE ═══ */
+.phone {
+  width: 393px; height: 852px;
+  background: var(--bg); border-radius: 44px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 0 0 8px #1A1A2E, 0 0 0 10px #2A2A45, 0 24px 80px rgba(0,0,0,0.35);
+  display: flex; flex-direction: column;
+}
+.chat-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, #FDECC2 0%, #F0EAE0 30%, #F8F5EF 60%);
+  z-index: 0;
+}
+
+.status-bar {
+  height: 54px; padding: 14px 28px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 15px; font-weight: 600; color: #000;
+  flex-shrink: 0; z-index: 10; position: relative;
+}
+.chat-topbar-bg {
+  position: absolute; top: 0; left: 0; right: 0; height: 112px;
+  background: linear-gradient(180deg, rgba(253,236,194,1) 0%, rgba(255,255,255,0) 100%);
+  opacity: 0.8; z-index: 1; pointer-events: none;
+}
+
+.top-bar {
+  height: 48px; padding: 12px 16px;
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: 16px;
+  flex-shrink: 0; z-index: 10; position: relative;
+}
+.top-close {
+  width: 36px; height: 36px; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; background: #F9F9FC; border: none;
+  backdrop-filter: blur(16px);
+  transition: opacity .2s;
+}
+.top-close:active { opacity: 0.6; }
+.top-close img { width: 36px; height: 36px; display: block; }
+
+.chat-area {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  padding: 8px 16px 16px 80px;
+  display: flex; flex-direction: column; gap: 8px;
+  z-index: 5; position: relative;
+  scroll-behavior: smooth;
+}
+.chat-area::-webkit-scrollbar { display: none; }
+
+.date-label {
+  text-align: center; padding: 6px 0;
+  font-size: 12px; color: rgba(40,39,55,0.3); margin-left: -64px;
+}
+
+.bubble {
+  padding: 12px 16px; font-size: 16px; line-height: 1.5;
+  color: var(--text-bubble);
+  opacity: 0; transform: translateY(12px);
+  animation: bIn .4s cubic-bezier(.34,1.4,.64,1) forwards;
+}
+.bubble.ai {
+  background: var(--bg-component); border: 1px solid #fff;
+  border-radius: 20px 20px 20px 0; backdrop-filter: blur(16px);
+  max-width: 280px;
+}
+@keyframes bIn { to { opacity:1; transform:translateY(0); } }
+
+/* ═══ REC CARD ═══ */
+.rec-card {
+  background: #fff; border-radius: 20px 20px 20px 0;
+  overflow: hidden;
+  opacity: 0; transform: translateY(14px);
+  animation: bIn .5s cubic-bezier(.34,1.2,.64,1) .25s forwards;
+  transition: all .4s ease;
+}
+.rec-top {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px;
+}
+.rec-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  overflow: hidden; flex-shrink: 0;
+  background: #FCECCA;
+  display: flex; align-items: center; justify-content: center;
+}
+.rec-icon img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.rec-info { flex: 1; }
+.rec-name { font-size: 14px; font-weight: 500; color: var(--text-bubble); transition: all .3s; }
+.rec-sub {
+  font-size: 14px; color: var(--text-gray); margin-top: 1px; line-height: 1.5;
+  transition: all .3s;
+}
+.rec-meta { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
+.rec-tag {
+  background: var(--primary-lt); border-radius: 999px;
+  padding: 3px 8px; font-size: 10px; color: var(--primary);
+  transition: all .3s;
+}
+.rec-tag.time { display: flex; align-items: center; gap: 2px; }
+.rec-div { height: 1px; background: #F5F5F5; transition: opacity .3s; }
+.rec-actions {
+  padding: 12px 16px; display: flex; gap: 8px;
+  transition: all .3s;
+}
+.rec-btn {
+  padding: 14px 0; border-radius: 999px; font-family: var(--font);
+  font-size: 14px; font-weight: 400; cursor: pointer;
+  transition: all .2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.rec-btn.pri {
+  background: var(--primary); color: #fff; border: none; flex: 1;
+}
+.rec-btn.pri:active { transform: scale(.97); }
+.rec-btn.sec {
+  background: var(--primary-lt); color: var(--primary);
+  border: none; flex: 1;
+}
+
+/* Card activated state */
+.rec-card.activated {
+  background: #F0EFFD;
+  border: 1px solid rgba(113,104,214,0.12);
+}
+.rec-card.activated .rec-name { color: var(--text-bubble); }
+.rec-card.activated .rec-div { opacity: 0; height: 0; }
+.rec-card.activated .rec-actions { display: none; }
+.rec-card.activated .rec-status { display: flex; }
+
+/* Status badge row (hidden by default) */
+.rec-status {
+  display: none;
+  align-items: center; gap: 6px;
+  padding: 0 16px 14px;
+}
+.rec-status-badge {
+  display: flex; align-items: center; gap: 4px;
+  background: rgba(82,201,122,0.12); border-radius: 999px;
+  padding: 4px 10px; font-size: 12px; color: #2EA44F; font-weight: 500;
+}
+.rec-status-badge svg { width: 14px; height: 14px; }
+.rec-status-time {
+  font-size: 12px; color: var(--primary); font-weight: 400;
+}
+.rec-edit-btn {
+  margin-left: auto;
+  width: 28px; height: 28px; border-radius: 8px;
+  background: rgba(113,104,214,0.08);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
+}
+.rec-edit-btn:active { background: rgba(113,104,214,0.16); }
+.rec-edit-btn svg { width: 14px; height: 14px; }
+
+/* Action bar - Figma: gradient bg + rounded input + plus circle */
+.action-bar-bg {
+  position: absolute; left: 0; right: 0; bottom: 34px; height: 160px;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(253,236,194,1) 100%);
+  opacity: 0.8; z-index: 8; pointer-events: none;
+}
+.action-bar {
+  padding: 8px 16px; display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0; z-index: 10; position: relative;
+}
+.input-wrap {
+  flex: 1; display: flex; align-items: center;
+  background: var(--bg-component); border-radius: 36px;
+  padding: 6px 4px 6px 16px; gap: 12px; height: 40px;
+  box-shadow: 0px 4px 4px -2px rgba(10,13,18,0.04), 0px 24px 48px -12px rgba(10,13,18,0.18);
+}
+.input-wrap input {
+  flex: 1; border: none; outline: none; background: transparent;
+  font-family: var(--font); font-size: 16px; line-height: 1.5;
+}
+.input-wrap input::placeholder { color: rgba(40,39,55,0.3); }
+.action-plus {
+  width: 40px; height: 40px; border-radius: 999px;
+  background: var(--bg-component); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0px 4px 4px -2px rgba(10,13,18,0.04), 0px 24px 48px -12px rgba(10,13,18,0.18);
+}
+.action-plus img { width: 40px; height: 40px; display: block; }
+.ai-label {
+  text-align: center; font-size: 12px; font-weight: 500;
+  color: #fff; opacity: 0.8; padding: 4px 0; z-index: 10; position: relative;
+}
+.home-indicator {
+  height: 34px; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; z-index: 10; position: relative;
+}
+.home-bar { width: 134px; height: 5px; background: #000; opacity: .12; border-radius: 100px; }
+
+/* ═══ OVERLAY + DETAIL PAGE ═══ */
+.overlay {
+  position: absolute; inset: 0; z-index: 50;
+  background: rgba(0,0,0,0); pointer-events: none;
+  transition: background .4s; border-radius: 44px; overflow: hidden;
+}
+.overlay.show { background: rgba(0,0,0,0.75); pointer-events: auto; }
+
+.detail-page {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 60;
+  background: var(--bg); border-radius: 28px 28px 0 0;
+  transform: translateY(100%);
+  transition: transform .5s cubic-bezier(.32,.72,0,1);
+  display: flex; flex-direction: column; overflow: hidden;
+  top: 140px;
+}
+.detail-page.show { transform: translateY(0); }
+
+.detail-scroll {
+  flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+}
+.detail-scroll::-webkit-scrollbar { display: none; }
+
+/* Night header */
+.night-hdr {
+  position: relative;
+  border-radius: 24px 24px 0 0;
+  overflow: hidden;
+  padding: 16px; min-height: 110px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.night-hdr-bg {
+  position: absolute; inset: 0;
+  background: url('assets/header-bg.png') center / cover no-repeat;
+  z-index: 0;
+}
+.night-stars { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.night-star {
+  position: absolute; width: 2px; height: 2px;
+  background: #fff; border-radius: 50%;
+  animation: twk var(--d,3s) ease-in-out infinite;
+  animation-delay: var(--dl,0s);
+}
+@keyframes twk { 0%,100%{opacity:.2} 50%{opacity:.8} }
+.night-moon {
+  position: absolute; top: 14px; right: 16px; z-index: 2;
+  width: 28px; height: 26px;
+}
+.night-moon img { width: 100%; height: 100%; }
+.night-row {
+  display: flex; align-items: center; gap: 10px; position: relative; z-index: 2;
+}
+.night-icon { width: 41px; height: 41px; border-radius: 10px; overflow: hidden; }
+.night-icon img { width: 100%; height: 100%; display: block; }
+.night-title { font-size: 24px; font-weight: 400; color: #fff; line-height: 1.4; }
+.night-desc {
+  font-size: 15px; color: rgba(255,255,255,0.65);
+  margin-top: 4px; position: relative; z-index: 2; line-height: 1.4;
+}
+
+/* Content sections */
+.section-block { padding: 20px 24px 0; }
+.section-title {
+  font-size: 14px; font-weight: 400; color: var(--text-gray);
+  line-height: 1.4; margin-bottom: 8px;
+}
+.section-title .emoji { margin-right: 2px; }
+.section-title strong { font-weight: 500; color: var(--text-bubble); }
+.section-body { font-size: 14px; color: var(--text-gray); line-height: 1.4; }
+.section-body p { margin-bottom: 6px; }
+.section-body ol { padding-left: 22px; margin: 4px 0 6px; }
+.section-body ol li { margin-bottom: 3px; font-size: 14px; line-height: 1.55; color: var(--text-gray); }
+
+/* How to start card */
+.how-card {
+  margin: 18px 24px 0;
+  border-radius: 29px; background: #fff;
+  padding: 16px 20px 18px;
+}
+.how-title { font-size: 14px; font-weight: 400; color: var(--text-gray); line-height: 1.4; margin-bottom: 10px; }
+.how-title strong { font-weight: 500; color: var(--text-bubble); }
+.how-list { font-size: 14px; color: var(--text-bubble); line-height: 1.6; }
+.how-list ol { padding-left: 20px; margin: 0; }
+.how-list ol li { margin-bottom: 6px; color: var(--text-bubble); }
+
+/* Time range with select dropdowns */
+.time-row {
+  display: flex; align-items: center; justify-content: flex-start;
+  gap: 10px; padding: 10px 0 6px;
+}
+.time-select {
+  font-family: var(--font);
+  font-size: 18px; font-weight: 400;
+  color: var(--primary);
+  background: rgba(113,104,214,0.06);
+  border: 1.5px solid rgba(113,104,214,0.2);
+  border-radius: 16px;
+  padding: 9px 12px 9px 20px;
+  text-align: center;
+  min-width: 120px;
+  outline: none; cursor: pointer;
+  transition: border-color .2s;
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%237168D6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+.time-select:focus { border-color: var(--primary); }
+.time-sep { font-size: 14px; color: var(--text-gray); font-weight: 400; }
+
+/* CTA */
+.detail-cta { padding: 18px 24px 0; flex-shrink: 0; }
+.cta-btn {
+  width: 100%; padding: 16px 0; border-radius: 999px; border: none;
+  background: var(--primary); color: #fff;
+  font-family: var(--font); font-size: 16px; font-weight: 400;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(113,104,214,0.3);
+  transition: all .2s; position: relative; overflow: hidden;
+  animation: glow 2.5s ease-in-out infinite;
+}
+.cta-btn:active { transform: scale(.97); }
+.cta-btn.done { background: #52C97A; animation: none; box-shadow: 0 4px 16px rgba(82,201,122,0.3); }
+@keyframes glow {
+  0%,100% { box-shadow: 0 4px 16px rgba(113,104,214,0.3); }
+  50% { box-shadow: 0 4px 24px rgba(113,104,214,0.45); }
+}
+.cta-skip {
+  text-align: center; padding: 12px 0 0;
+  font-size: 13px; color: var(--text-gray);
+  cursor: pointer; background: none; border: none;
+  font-family: var(--font); width: 100%;
+}
+/* Removed: cta-manage link (per design spec) */
+.detail-safe { height: 34px; flex-shrink: 0; }
+
+/* Confetti */
+.cf {
+  position: fixed; pointer-events: none; z-index: 999; border-radius: 2px;
+  animation: cfDrop .8s ease forwards;
+}
+@keyframes cfDrop {
+  0% { opacity:1; transform:translateY(0) rotate(0) scale(1); }
+  100% { opacity:0; transform:translateY(70px) rotate(540deg) scale(.4); }
+}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="chat-bg"></div>
+  <div class="chat-topbar-bg"></div>
+
+  <div class="status-bar">
+    <span>9:41</span>
+    <span style="font-size:12px; display:flex; gap:4px; align-items:center;">
+      <svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="7" width="3" height="5" rx=".5" fill="#000"/><rect x="4" y="4" width="3" height="8" rx=".5" fill="#000"/><rect x="8" y="2" width="3" height="10" rx=".5" fill="#000"/><rect x="12" y="0" width="3" height="12" rx=".5" fill="#000"/></svg>
+      <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.5C10.7 2.5 13 3.8 14.5 6L13 7.5C11.8 5.8 10 4.5 8 4.5C6 4.5 4.2 5.8 3 7.5L1.5 6C3 3.8 5.3 2.5 8 2.5Z" fill="#000"/><circle cx="8" cy="10" r="1.5" fill="#000"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2" stroke="#000" stroke-width="1" fill="none"/><rect x="22" y="4" width="2" height="4" rx=".5" fill="#000"/><rect x="1.5" y="2.5" width="18" height="7.5" rx="1" fill="#000"/></svg>
+    </span>
+  </div>
+
+  <div class="top-bar">
+    <button class="top-close" onclick="window.location.href='index.html'">
+      <img src="assets/chat-topbar-close.png" alt="关闭">
+    </button>
+  </div>
+
+  <div class="chat-area" id="chatArea">
+    <div class="bubble ai" style="animation-delay:0s">晚安糯糯妈妈，祝你有个好梦！</div>
+    <div class="date-label">今天</div>
+    <div class="bubble ai" style="animation-delay:.1s">糯糯妈妈，晚上好！</div>
+    <div class="bubble ai" style="animation-delay:.2s; max-width: 260px;">我想给你推荐一个亲子互动活动，今晚就可以试试！</div>
+
+    <!-- Task card -->
+    <div class="rec-card" id="recCard">
+      <div class="rec-top">
+        <div class="rec-icon"><img src="assets/rec-card-activity-icon.png" alt="种星星"></div>
+        <div class="rec-info">
+          <div class="rec-name" id="recName">种星星</div>
+          <div class="rec-sub" id="recSub">每晚 10 分钟 · 睡前亲子互动</div>
+        </div>
+      </div>
+      <div class="rec-div" id="recDiv"></div>
+      <div class="rec-actions" id="recActions">
+        <button class="rec-btn pri" onclick="openDetail()">了解详情</button>
+        <button class="rec-btn sec" onclick="openDetail()">直接试试</button>
+      </div>
+      <!-- Hidden status row, shown after activation -->
+      <div class="rec-status" id="recStatus">
+        <div class="rec-status-badge">
+          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#2EA44F" stroke-width="1.5"/><path d="M5 8.5L7 10.5L11 6" stroke="#2EA44F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span id="recBadgeText">已开启</span>
+        </div>
+        <span class="rec-status-time" id="recTime"></span>
+        <button class="rec-edit-btn" onclick="editTask()" title="编辑">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#7168D6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 2.5l2 2-8 8H3.5v-2l8-8z"/><path d="M10 4l2 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-bar-bg"></div>
+  <div class="action-bar">
+    <div class="input-wrap">
+      <input placeholder="告诉我任何事情" readonly>
+    </div>
+    <button class="action-plus">
+      <img src="assets/chat-action-plus.png" alt="+">
+    </button>
+  </div>
+  <div class="ai-label">內容由 AI 生成</div>
+  <div class="home-indicator"><div class="home-bar"></div></div>
+
+  <div class="overlay" id="overlay" onclick="closeDetail()"></div>
+
+  <!-- ═══ DETAIL PAGE ═══ -->
+  <div class="detail-page" id="detailPage">
+    <div class="detail-scroll">
+      <div class="night-hdr" id="nightHdr">
+        <div class="night-hdr-bg"></div>
+        <div class="night-stars" id="ns"></div>
+        <div class="night-moon"><img src="assets/moon.svg" alt="moon"></div>
+        <div class="night-row">
+          <div class="night-icon"><img src="assets/star-icon.png" alt="star"></div>
+          <div class="night-title">种星星</div>
+        </div>
+        <div class="night-desc">睡前 10 分钟，听听糯糯的心里话</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title"><span class="emoji">🎮</span> <strong>互动步骤</strong></div>
+        <div class="section-body">
+          <p>星仔会带你们玩一个"种星星"的游戏：</p>
+          <ol>
+            <li>🌹 分享今天的开心事，像种下一朵玫瑰</li>
+            <li>🌵 说出不开心，把心里的"小刺"拔出来丢掉</li>
+            <li>🌱 表达明天的期待，让小芽长出惊喜</li>
+          </ol>
+          <p>聊完后，星仔会把你们的对话放进画里，明早送给你和糯糯。</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-title"><span class="emoji">💡</span> <strong>推荐原因</strong></div>
+        <div class="section-body">
+          <p>这是针对糯糯的情绪表达练习：这个环节能帮 3 岁孩子学会理解情绪，自在地表达"开心"、安全地吐露"不开心"。</p>
+        </div>
+      </div>
+
+      <div class="how-card">
+        <div class="how-title"><strong>怎么开始？</strong></div>
+        <div class="how-list">
+          <ol>
+            <li>切换到孩子模式</li>
+            <li>
+              每晚在这个时间段找星仔聊天，它会主动邀请你们种星星
+              <div class="time-row">
+                <select class="time-select" id="timeStart"></select>
+                <span class="time-sep">~</span>
+                <select class="time-select" id="timeEnd"></select>
+              </div>
+            </li>
+            <li>你也可以随时跟星仔说"玩种星星游戏"</li>
+          </ol>
+        </div>
+      </div>
+
+      <div style="height: 12px;"></div>
+    </div>
+
+    <div class="detail-cta">
+      <button class="cta-btn" id="ctaBtn" onclick="accept()">今晚试试</button>
+      <button class="cta-skip" id="ctaSkip" onclick="closeDetail()">下次再说</button>
+    </div>
+    <div class="detail-safe"></div>
+  </div>
+</div>
+
+<script>
+// ─── Stars ───
+const ns = document.getElementById('ns');
+for (let i = 0; i < 20; i++) {
+  const s = document.createElement('div');
+  s.className = 'night-star';
+  s.style.left = Math.random()*100+'%';
+  s.style.top = Math.random()*100+'%';
+  s.style.setProperty('--d', (2+Math.random()*3)+'s');
+  s.style.setProperty('--dl', Math.random()*2+'s');
+  if (Math.random()>.7) { s.style.width='3px'; s.style.height='3px'; }
+  ns.appendChild(s);
+}
+
+// ─── Populate time selects in 30-min steps ───
+function populateTimeSelect(selectEl, defaultValue) {
+  for (let h = 18; h <= 23; h++) {
+    for (let m = 0; m < 60; m += 30) {
+      const val = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0');
+      const opt = document.createElement('option');
+      opt.value = val;
+      opt.textContent = val;
+      if (val === defaultValue) opt.selected = true;
+      selectEl.appendChild(opt);
+    }
+  }
+  // Also add 00:00 for midnight
+  const mid = document.createElement('option');
+  mid.value = '00:00'; mid.textContent = '00:00';
+  selectEl.appendChild(mid);
+}
+populateTimeSelect(document.getElementById('timeStart'), '20:00');
+populateTimeSelect(document.getElementById('timeEnd'), '21:00');
+
+// ─── Detail open/close ───
+function openDetail() {
+  document.getElementById('overlay').classList.add('show');
+  document.getElementById('detailPage').classList.add('show');
+}
+function closeDetail() {
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('detailPage').classList.remove('show');
+}
+
+let isEditing = false;
+
+// ─── Edit task (reopen detail in edit mode) ───
+function editTask() {
+  isEditing = true;
+  const b = document.getElementById('ctaBtn');
+  b.classList.remove('done');
+  b.textContent = '保存修改';
+  b.style.pointerEvents = 'auto';
+  document.getElementById('ctaSkip').textContent = '取消';
+  // manage link removed per design spec
+  openDetail();
+  setTimeout(() => {
+    const howCard = document.querySelector('.how-card');
+    if (howCard) howCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 600);
+}
+
+// ─── Update card to activated state ───
+function activateCard(t1, t2) {
+  const card = document.getElementById('recCard');
+  card.classList.add('activated');
+  document.getElementById('recSub').textContent = '每晚 ' + t1 + ' ~ ' + t2 + ' · 已开启';
+  document.getElementById('recActions').style.display = 'none';
+  document.getElementById('recDiv').style.display = 'none';
+  document.getElementById('recTime').textContent = '每晚 ' + t1 + ' ~ ' + t2;
+  document.getElementById('recBadgeText').textContent = '已开启';
+}
+
+
+// ─── Accept ───
+function accept() {
+  const b = document.getElementById('ctaBtn');
+  if (b.classList.contains('done')) return;
+  b.classList.add('done');
+
+  const t1 = document.getElementById('timeStart').value;
+  const t2 = document.getElementById('timeEnd').value;
+
+  if (isEditing) {
+    // Edit mode: just update and close
+    b.textContent = '✅ 已保存';
+    b.style.pointerEvents = 'none';
+    setTimeout(() => {
+      closeDetail();
+      setTimeout(() => {
+        activateCard(t1, t2);
+        // Add update bubble
+        const a = document.getElementById('chatArea');
+        const d = document.createElement('div');
+        d.className = 'bubble ai';
+        d.style.maxWidth = '280px';
+        d.innerHTML = '已更新！种星星时间改为每晚 ' + t1 + ' ~ ' + t2 + ' 🌟';
+        a.appendChild(d);
+        setTimeout(() => a.scrollTop = a.scrollHeight, 50);
+        // Reset for next edit
+        isEditing = false;
+        document.getElementById('ctaSkip').textContent = '下次再说';
+      }, 300);
+    }, 600);
+    return;
+  }
+
+  // First-time accept
+  b.textContent = '✅ 已设定 ' + t1 + ' ~ ' + t2;
+  b.style.pointerEvents = 'none';
+
+  // Confetti
+  const r = b.getBoundingClientRect();
+  const cx = r.left + r.width/2, cy = r.top;
+  const cols = ['#7168D6','#F8837C','#92E27C','#F8D8A8','#9B93FF'];
+  for (let i = 0; i < 14; i++) {
+    const c = document.createElement('div');
+    c.className = 'cf';
+    const sz = 4 + Math.random()*5;
+    c.style.width = sz + 'px';
+    c.style.height = sz*(0.6 + Math.random()*0.6) + 'px';
+    c.style.background = cols[i % cols.length];
+    c.style.left = cx + (Math.random()-0.5)*180 + 'px';
+    c.style.top = cy - Math.random()*30 + 'px';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 900);
+  }
+
+  setTimeout(() => {
+    closeDetail();
+    setTimeout(() => {
+      activateCard(t1, t2);
+      const a = document.getElementById('chatArea');
+      const d = document.createElement('div');
+      d.className = 'bubble ai';
+      d.style.maxWidth = '280px';
+      d.innerHTML = '好！每晚 ' + t1 + ' ~ ' + t2 + ' 来找我聊天的话，我会邀请你们种星星 🌟<br>当然其他时间想玩也可以随时跟我说～';
+      a.appendChild(d);
+      setTimeout(() => a.scrollTop = a.scrollHeight, 50);
+    }, 300);
+  }, 1000);
+}
+</script>
+</body>
+</html>

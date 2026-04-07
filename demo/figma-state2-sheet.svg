@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="393" height="852" viewBox="0 0 393 852" fill="none">
+  <defs>
+    <linearGradient id="nightBg" x1="196" y1="0" x2="196" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1A1535"/>
+      <stop offset="0.6" stop-color="#2D1B4E"/>
+      <stop offset="1" stop-color="#3A2560"/>
+    </linearGradient>
+    <linearGradient id="moonGrad" x1="335" y1="58" x2="365" y2="88" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF8DC"/>
+      <stop offset="1" stop-color="#FFE4A8"/>
+    </linearGradient>
+    <linearGradient id="ctaGlow" x1="196" y1="730" x2="196" y2="774" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7168D6"/>
+      <stop offset="1" stop-color="#6057C4"/>
+    </linearGradient>
+    <filter id="moonGlow">
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#FFE8A8" flood-opacity="0.35"/>
+    </filter>
+    <filter id="cardShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0A0D12" flood-opacity="0.08"/>
+    </filter>
+    <filter id="ctaShadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#7168D6" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Page Background -->
+  <rect width="393" height="852" rx="44" fill="#F8F5EF"/>
+
+  <!-- Overlay (dark tint behind sheet) -->
+  <rect width="393" height="852" rx="44" fill="#000000" fill-opacity="0.3"/>
+
+  <!-- Top Bar (visible above sheet) -->
+  <g id="TopBar">
+    <text x="196" y="85" font-family="PingFang SC, -apple-system, sans-serif" font-size="16" fill="#FFFFFF" fill-opacity="0.8" text-anchor="middle">星仔</text>
+  </g>
+
+  <!-- ══ BOTTOM SHEET ══ -->
+  <g id="BottomSheet">
+    <!-- Sheet Background -->
+    <rect x="0" y="62" width="393" height="790" rx="32" fill="#F8F5EF"/>
+
+    <!-- Handle Bar -->
+    <rect x="178" y="72" width="36" height="5" rx="2.5" fill="#000000" fill-opacity="0.1"/>
+
+    <!-- ── Night Header ── -->
+    <g id="NightHeader">
+      <rect x="0" y="82" width="393" height="208" rx="24" fill="url(#nightBg)"/>
+      <!-- Bottom corners match sheet bg -->
+      <rect x="0" y="260" width="393" height="30" fill="url(#nightBg)"/>
+
+      <!-- Stars -->
+      <circle cx="45" cy="110" r="1" fill="#FFFFFF" fill-opacity="0.4"/>
+      <circle cx="90" cy="135" r="1.5" fill="#FFFFFF" fill-opacity="0.3"/>
+      <circle cx="140" cy="100" r="1" fill="#FFFFFF" fill-opacity="0.5"/>
+      <circle cx="200" cy="120" r="1.5" fill="#FFFFFF" fill-opacity="0.2"/>
+      <circle cx="250" cy="95" r="1" fill="#FFFFFF" fill-opacity="0.6"/>
+      <circle cx="280" cy="145" r="1" fill="#FFFFFF" fill-opacity="0.3"/>
+      <circle cx="310" cy="110" r="1.5" fill="#FFFFFF" fill-opacity="0.4"/>
+      <circle cx="60" cy="165" r="1" fill="#FFFFFF" fill-opacity="0.3"/>
+      <circle cx="160" cy="175" r="1" fill="#FFFFFF" fill-opacity="0.5"/>
+      <circle cx="220" cy="160" r="1.5" fill="#FFFFFF" fill-opacity="0.2"/>
+      <circle cx="350" cy="170" r="1" fill="#FFFFFF" fill-opacity="0.4"/>
+      <circle cx="120" cy="200" r="1" fill="#FFFFFF" fill-opacity="0.3"/>
+      <circle cx="70" cy="230" r="1.5" fill="#FFFFFF" fill-opacity="0.2"/>
+      <circle cx="300" cy="220" r="1" fill="#FFFFFF" fill-opacity="0.5"/>
+
+      <!-- Moon -->
+      <g filter="url(#moonGlow)">
+        <circle cx="345" cy="118" r="16" fill="url(#moonGrad)"/>
+        <circle cx="353" cy="114" r="13" fill="#1A1535" fill-opacity="0.85"/>
+      </g>
+
+      <!-- Star Emoji -->
+      <text x="24" y="130" font-family="Apple Color Emoji, sans-serif" font-size="36">🌟</text>
+
+      <!-- Title -->
+      <text x="24" y="180" font-family="PingFang SC, -apple-system, sans-serif" font-size="24" font-weight="600" fill="#FFFFFF">种星星</text>
+
+      <!-- Subtitle -->
+      <text x="24" y="206" font-family="PingFang SC, -apple-system, sans-serif" font-size="15" fill="#FFFFFF" fill-opacity="0.65">每晚 10 分钟，和孩子一起</text>
+      <text x="24" y="226" font-family="PingFang SC, -apple-system, sans-serif" font-size="15" fill="#FFFFFF" fill-opacity="0.65">种下今天的故事</text>
+
+      <!-- Tags -->
+      <g id="NightTags">
+        <rect x="24" y="244" width="82" height="26" rx="13" fill="#FFFFFF" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.12"/>
+        <text x="38" y="261" font-family="PingFang SC, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#FFFFFF" fill-opacity="0.75">🌙 睡前仪式</text>
+
+        <rect x="114" y="244" width="82" height="26" rx="13" fill="#FFFFFF" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.12"/>
+        <text x="124" y="261" font-family="PingFang SC, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#FFFFFF" fill-opacity="0.75">👨‍👩‍👧 亲子三方</text>
+
+        <rect x="204" y="244" width="72" height="26" rx="13" fill="#FFFFFF" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.12"/>
+        <text x="218" y="261" font-family="PingFang SC, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#FFFFFF" fill-opacity="0.75">⏱ 10分钟</text>
+      </g>
+    </g>
+
+    <!-- ── Three Steps Section ── -->
+    <g id="ThreeSteps">
+      <text x="20" y="314" font-family="PingFang SC, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#424245">🎮 三步种星星</text>
+
+      <!-- Step 1: Rose -->
+      <g id="StepRose">
+        <rect x="20" y="330" width="113" height="110" rx="16" fill="#FFF5F5" stroke="#000000" stroke-opacity="0.04"/>
+        <text x="76" y="368" font-family="Apple Color Emoji, sans-serif" font-size="28" text-anchor="middle">🌹</text>
+        <text x="76" y="396" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#282737" text-anchor="middle">种一朵玫瑰</text>
+        <text x="76" y="416" font-family="PingFang SC, -apple-system, sans-serif" font-size="12" fill="#424245" text-anchor="middle">今天最开心</text>
+      </g>
+
+      <!-- Step 2: Thorn -->
+      <g id="StepThorn">
+        <rect x="140" y="330" width="113" height="110" rx="16" fill="#FFFBF0" stroke="#000000" stroke-opacity="0.04"/>
+        <text x="196" y="368" font-family="Apple Color Emoji, sans-serif" font-size="28" text-anchor="middle">🌵</text>
+        <text x="196" y="396" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#282737" text-anchor="middle">种一根小刺</text>
+        <text x="196" y="416" font-family="PingFang SC, -apple-system, sans-serif" font-size="12" fill="#424245" text-anchor="middle">今天不开心</text>
+      </g>
+
+      <!-- Step 3: Bud -->
+      <g id="StepBud">
+        <rect x="260" y="330" width="113" height="110" rx="16" fill="#F0FFF5" stroke="#000000" stroke-opacity="0.04"/>
+        <text x="316" y="368" font-family="Apple Color Emoji, sans-serif" font-size="28" text-anchor="middle">🌱</text>
+        <text x="316" y="396" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#282737" text-anchor="middle">种一颗小芽</text>
+        <text x="316" y="416" font-family="PingFang SC, -apple-system, sans-serif" font-size="12" fill="#424245" text-anchor="middle">明天最期待</text>
+      </g>
+    </g>
+
+    <!-- Steps Note -->
+    <g id="StepsNote">
+      <rect x="20" y="454" width="353" height="66" rx="14" fill="#F9F9FC" stroke="#000000" stroke-opacity="0.03"/>
+      <text x="34" y="481" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#424245">你和孩子<tspan font-weight="500" fill="#282737">轮流说</tspan>，星仔来主持引导 ✨</text>
+      <text x="34" y="505" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#424245">不需要准备任何东西，<tspan font-weight="500" fill="#282737">聊天就行</tspan>。</text>
+    </g>
+
+    <!-- After Card -->
+    <g id="AfterCard">
+      <rect x="20" y="536" width="353" height="66" rx="16" fill="#7168D6" fill-opacity="0.04" stroke="#7168D6" stroke-opacity="0.1"/>
+      <text x="44" y="570" font-family="Apple Color Emoji, sans-serif" font-size="28">🎨</text>
+      <text x="82" y="563" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#424245">种完之后，星仔会画一幅 <tspan font-weight="500" fill="#282737">"星光画"</tspan></text>
+      <text x="82" y="585" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#424245">第二天早上在成长日记里等你 📔</text>
+    </g>
+
+    <!-- ── Why Section (partially visible) ── -->
+    <g id="WhySection">
+      <text x="20" y="636" font-family="PingFang SC, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#424245">💡 为什么家长都在种星星？</text>
+
+      <!-- Item 1 -->
+      <rect x="20" y="652" width="36" height="36" rx="12" fill="#F8837C" fill-opacity="0.1"/>
+      <text x="28" y="676" font-family="Apple Color Emoji, sans-serif" font-size="18">🧒</text>
+      <text x="66" y="668" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#282737">孩子学会了表达</text>
+      <text x="66" y="688" font-family="PingFang SC, -apple-system, sans-serif" font-size="13" fill="#424245">"开心""不开心"说出来，比憋着强</text>
+    </g>
+
+    <!-- ── CTA Area ── -->
+    <g id="CTAArea">
+      <!-- CTA Button -->
+      <rect x="20" y="730" width="353" height="50" rx="25" fill="url(#ctaGlow)" filter="url(#ctaShadow)"/>
+      <text x="196" y="760" font-family="PingFang SC, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="middle">🌟 今晚就种一颗星星</text>
+
+      <!-- Links -->
+      <text x="144" y="804" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#424245">先看看别的</text>
+      <text x="227" y="804" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#000000" fill-opacity="0.12">·</text>
+      <text x="242" y="804" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#424245">了解更多</text>
+    </g>
+  </g>
+</svg>

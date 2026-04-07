@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>梨谱 · 对话</title>
+<style>
+:root {
+  /* 背景 */
+  --bg-primary: #F8F5EF;
+  --bg-white: #FFFFFF;
+  --bg-journal-list: #E7E6ED;
+  --bg-journal-detail: #F9F9FC;
+  --bg-task-panel: #F9F5EC;
+  --bg-hero: #9CB9CA;
+
+  /* 品牌色 */
+  --brand-purple: #987CFC;
+  --brand-purple-light: #C6B0FC;
+  --brand-pink: #EE8574;
+  --brand-pink-light: #FFE5DB;
+
+  /* 文字 */
+  --text-primary: #000000;
+  --text-secondary: #666666;
+  --text-hint: #AAAAAA;
+  --text-border: rgba(0, 0, 0, 0.04);
+
+  /* 字体 */
+  --font-family: "PingFang SC", -apple-system, "Noto Sans SC", "Helvetica Neue", sans-serif;
+  --letter-spacing: -0.01em;
+
+  /* 圆角 */
+  --radius-bubble-ai: 0 20px 20px 20px;
+  --radius-bubble-user: 20px 20px 0 20px;
+  --radius-card: 0 20px 20px 20px;
+  --radius-tag: 10px;
+  --radius-full: 999px;
+  --radius-input: 24px;
+  --radius-btn: 24px;
+
+  /* 间距 */
+  --space-page: 16px;
+  --space-gap-bubbles: 12px;
+  --space-safe-bottom: 34px;
+
+  /* 阴影 */
+  --shadow-soft: 0px 2.55px 7.64px rgba(77, 53, 50, 0.06);
+  --shadow-3xl: 0px 5px 5px -2.5px rgba(10,13,18,0.04), 0px 32px 64px -12px rgba(10,13,18,0.14);
+
+  /* 模糊 */
+  --blur-nav: blur(24px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-family);
+  letter-spacing: var(--letter-spacing);
+  background: #e8e4de;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══ Phone Frame ═══ */
+.phone {
+  width: 393px;
+  height: 852px;
+  background: var(--bg-primary);
+  border-radius: 48px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+/* ═══ Background ═══ */
+.bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: url('chat-bg.png') center / 100% 100% no-repeat;
+}
+
+/* ═══ Status Bar ═══ */
+.status-bar {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 54px;
+  padding: 14px 24px 0;
+}
+.status-time {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.status-icons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.status-icons span {
+  font-size: 13px;
+}
+
+/* ═══ Top Bar ═══ */
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 50px 16px 10px;
+  background: linear-gradient(180deg, rgba(248,245,239,0.95) 0%, rgba(248,245,239,0) 100%);
+}
+.close-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,0.5);
+  border: 0.58px solid rgba(255,255,255,0.6);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  backdrop-filter: blur(8px);
+}
+
+/* ═══ Chat Area ═══ */
+.chat-area {
+  position: relative;
+  z-index: 10;
+  height: calc(852px - 54px - 82px);
+  overflow-y: auto;
+  padding: 8px 16px 20px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-bubbles);
+  scrollbar-width: none;
+}
+.chat-area::-webkit-scrollbar { display: none; }
+
+/* ═══ Date Divider ═══ */
+.date-divider {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+}
+.date-pill {
+  font-size: 12px;
+  color: #B5AFA5;
+  background: rgba(248,245,239,0.6);
+  padding: 4px 12px;
+  border-radius: var(--radius-tag);
+}
+
+/* ═══ Message Row ═══ */
+.msg-row {
+  display: flex;
+  flex-direction: column;
+}
+.msg-row.ai {
+  align-items: flex-start;
+  padding-right: 0;
+}
+.msg-row.user {
+  align-items: flex-end;
+  padding-left: 0;
+}
+
+/* ═══ Bubble ═══ */
+.bubble {
+  padding: 12px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #282737;
+  max-width: 297px;
+  word-break: break-word;
+}
+.bubble-ai {
+  background: #F9F9FC;
+  border: 1px solid #FFFFFF;
+  border-radius: 20px 20px 20px 0;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  width: 297px;
+}
+.bubble-user {
+  background: #EFEEFC;
+  border-radius: 20px 20px 0 20px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  max-width: 285px;
+}
+
+/* ═══ Task Card ═══ */
+.task-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-card);
+  padding: 0;
+  overflow: hidden;
+  max-width: 310px;
+  box-shadow: 0 2px 12px rgba(77,53,50,0.06);
+}
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.task-card-header-left {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.task-card-header-right {
+  font-size: 13px;
+  color: var(--brand-purple);
+  cursor: pointer;
+}
+.task-card-body {
+  padding: 14px 18px;
+}
+.task-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.task-card-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 16px;
+}
+.task-card-meta {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 14px;
+}
+.task-card-actions {
+  display: flex;
+  gap: 10px;
+}
+.btn-primary {
+  background: var(--brand-purple);
+  color: white;
+  border: none;
+  border-radius: var(--radius-btn);
+  padding: 10px 28px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+.btn-secondary {
+  background: #F0EFEF;
+  color: #555;
+  border: none;
+  border-radius: var(--radius-btn);
+  padding: 10px 28px;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+/* ═══ Create Task Card ═══ */
+.create-task-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-card);
+  padding: 16px 18px;
+  max-width: 310px;
+  box-shadow: 0 2px 12px rgba(77,53,50,0.06);
+}
+.create-task-icon {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: var(--brand-purple);
+  font-weight: 500;
+}
+.create-task-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.create-task-list {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+  padding-left: 18px;
+  margin-bottom: 6px;
+}
+.create-task-list li {
+  margin-bottom: 4px;
+}
+
+/* ═══ Bottom Action Bar ═══ */
+.bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 8px 16px 0;
+  background: linear-gradient(180deg, rgba(248,245,239,0) 0%, rgba(248,245,239,0.9) 30%);
+}
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.input-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: var(--bg-white);
+  border-radius: var(--radius-input);
+  padding: 10px 16px;
+  gap: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.input-plus {
+  font-size: 20px;
+  color: #B5AFA5;
+  cursor: pointer;
+  line-height: 1;
+}
+.input-text {
+  flex: 1;
+  font-size: 15px;
+  color: var(--text-hint);
+}
+.input-call {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--bg-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  cursor: pointer;
+}
+.input-call-icon {
+  font-size: 20px;
+  color: var(--brand-purple);
+}
+.ai-disclaimer {
+  text-align: center;
+  font-size: 11px;
+  color: #C5BEAE;
+  padding: 4px 0 6px;
+}
+.home-indicator {
+  width: 134px;
+  height: 5px;
+  background: #1A1A1A;
+  border-radius: 100px;
+  margin: 6px auto 8px;
+  opacity: 0.15;
+}
+
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <!-- Background -->
+  <div class="bg-layer"></div>
+
+  <!-- Top bar with close button -->
+  <div class="top-bar">
+    <div class="close-btn">✕</div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span class="status-time">9:41</span>
+    <div class="status-icons">
+      <span>▄▄▆█</span>
+      <span>📶</span>
+      <span>🔋</span>
+    </div>
+  </div>
+
+  <!-- Chat Area -->
+  <div class="chat-area" id="chatArea">
+
+    <!-- Old message at top (partially visible) -->
+    <div class="msg-row ai">
+      <div class="bubble bubble-ai">晚安糯糯妈妈，祝你有个好梦！</div>
+    </div>
+
+    <!-- Date -->
+    <div class="date-divider"><span class="date-pill">今天</span></div>
+
+    <!-- AI message -->
+    <div class="msg-row ai">
+      <div class="bubble bubble-ai">糯糯妈妈，晚上好！</div>
+    </div>
+
+    <!-- AI message (longer) -->
+    <div class="msg-row ai">
+      <div class="bubble bubble-ai">糯糯妈妈，有个关于糯糯在幼儿园的小细节，我想你可能想知道。</div>
+    </div>
+
+    <!-- AI message (multi-paragraph) -->
+    <div class="msg-row ai">
+      <div class="bubble bubble-ai">这两天糯糯跟我聊天时，提到了好几次她"只看着别的小朋友玩"。她其实很想加入，但她说"不知道怎么开口"，怕乐乐不理她。这种社交探索期的畏难情绪，对 4 岁的孩子来说很常见。</div>
+    </div>
+
+    <!-- AI message -->
+    <div class="msg-row ai">
+      <div class="bubble bubble-ai">我建议给糯糯开一个社交专项练习，带她熟悉这种情况怎么应对。</div>
+    </div>
+
+    <!-- User message -->
+    <div class="msg-row user">
+      <div class="bubble bubble-user">啊，要不我明天跟老师说一声，让老师安排乐乐带着她玩？或者我直接约乐乐妈妈周末出来聚聚，让她俩熟悉熟悉</div>
+    </div>
+
+    <!-- AI response -->
+    <div class="msg-row ai">
+      <div class="bubble bubble-ai">糯糯妈妈，我非常理解这种想立刻帮糯糯解决麻烦的心情。</div>
+    </div>
+
+    <!-- AI response -->
+    <div class="msg-row ai">
+      <div class="bubble bubble-ai">但根据我的观察，糯糯现在缺的不是"机会"，而是"社交肌肉"。如果我们直接让老师或家长出面，她虽然进场了，但并没有学会怎么自己推开那扇门。</div>
+    </div>
+
+    <!-- AI suggestion -->
+    <div class="msg-row ai">
+      <div class="bubble bubble-ai">要不要先试试让她在家里跟我练习。我会在对话里模拟被拒绝的情况，陪她一起消化那点"不好意思"，然后你再创造机会让她跟其他小伙伴相处。</div>
+    </div>
+
+    <!-- User reply -->
+    <div class="msg-row user">
+      <div class="bubble bubble-user">你说得也是，那就按你的方案试试吧</div>
+    </div>
+
+    <!-- AI confirm -->
+    <div class="msg-row ai">
+      <div class="bubble bubble-ai">好的！我会在近期的对话里，跟糯糯玩个她喜欢的公主角色扮演游戏！</div>
+    </div>
+
+    <!-- Task create card -->
+    <div class="msg-row ai">
+      <div class="create-task-card">
+        <div class="create-task-icon">💡 创建任务：社交破冰练习</div>
+        <ul class="create-task-list">
+          <li><strong>目标</strong>：帮糯糯找到和练习适合她的社交破冰方式，让她可以自信入场。</li>
+          <li><strong>策略</strong>：角色扮演（星仔演拒绝者，练习心态；星仔演接纳者，练习表达）</li>
+        </ul>
+        <div class="task-card-meta">⏱ 预计进行 3 次引导对话</div>
+        <div class="task-card-actions">
+          <button class="btn-primary">开启任务</button>
+          <button class="btn-secondary">调整</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Input Bar -->
+  <div class="bottom-bar">
+    <div class="input-row">
+      <div class="input-box">
+        <span class="input-plus">+</span>
+        <span class="input-text">告诉我任何事情</span>
+      </div>
+      <div class="input-call">
+        <span class="input-call-icon">📞</span>
+      </div>
+    </div>
+    <div class="ai-disclaimer">内容由 AI 生成</div>
+    <div class="home-indicator"></div>
+  </div>
+
+</div>
+
+</body>
+</html>

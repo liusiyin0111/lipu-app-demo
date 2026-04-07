@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>梨谱 · 亲子活动空间</title>
+<style>
+:root {
+  --bg: #F8F5EF;
+  --card-bg: #F9F9FC;
+  --primary: #7168D6;
+  --primary-lt: #EFEEFC;
+  --green: #2EA44F;
+  --green-bg: #EDF6F0;
+  --green-light: rgba(82,201,122,0.1);
+  --red: #F8837C;
+  --text-main: #282737;
+  --text-sub: #424245;
+  --text-section: #6F6E75;
+  --text-hint: rgba(40,39,55,0.3);
+  --tag-time: #EFEEFC;
+  --tag-stat-bg: rgba(82,201,122,0.1);
+  --stopped-bg: rgba(0,0,0,0.06);
+  --stopped-color: #9A9A9A;
+  --border: rgba(0,0,0,0.04);
+  --font: "PingFang SC", -apple-system, "Noto Sans SC", sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body {
+  height: 100%; background: #E8E4DD;
+  font-family: var(--font); overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══ PHONE ═══ */
+.phone {
+  width: 393px; height: 852px;
+  background: var(--bg); border-radius: 44px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 0 0 8px #1A1A2E, 0 0 0 10px #2A2A45, 0 24px 80px rgba(0,0,0,0.35);
+  display: flex; flex-direction: column;
+}
+
+/* Status bar */
+.status-bar {
+  height: 54px; padding: 14px 28px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 15px; font-weight: 600; color: #000;
+  flex-shrink: 0; z-index: 10;
+}
+
+/* Top bar */
+.top-bar {
+  height: 52px; padding: 0 16px;
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0; z-index: 10;
+}
+.back-btn {
+  width: 36px; height: 36px; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; background: none; border: none;
+  background: var(--card-bg);
+  transition: background .2s;
+}
+.back-btn:active { background: rgba(0,0,0,0.08); }
+.back-btn img { width: 20px; height: 20px; }
+
+/* ═══ PAGE CONTENT ═══ */
+.page-content {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  padding: 0 0 40px;
+  scroll-behavior: smooth;
+}
+.page-content::-webkit-scrollbar { display: none; }
+
+/* Page header */
+.page-title {
+  font-size: 22px; font-weight: 400; color: var(--text-main);
+  text-align: center; padding: 4px 0 16px;
+  line-height: 1.4;
+}
+
+/* Section */
+.section {
+  padding: 0 16px; margin-bottom: 9px;
+}
+.section-label {
+  font-size: 14px; font-weight: 400; color: var(--text-section);
+  padding: 0 0 9px;
+  line-height: 1.4;
+}
+
+/* ═══ TASK LIST CONTAINER ═══ */
+.task-list {
+  background: var(--card-bg);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+/* ═══ TASK ITEM ═══ */
+.task-item {
+  position: relative;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.task-item:last-child { border-bottom: none; }
+
+.task-content {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 16px;
+  position: relative; z-index: 2;
+  background: var(--card-bg);
+  transition: transform .3s cubic-bezier(.25,.8,.25,1);
+  cursor: pointer;
+}
+.task-content.swiped { transform: translateX(-140px); }
+
+/* Task icon */
+.task-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.task-icon img {
+  width: 48px; height: 48px;
+  display: block;
+}
+
+/* Task body */
+.task-body { flex: 1; min-width: 0; padding-top: 2px; }
+.task-name {
+  font-size: 16px; font-weight: 500; color: var(--text-main);
+  line-height: 1.5; letter-spacing: -0.01em;
+}
+.task-desc {
+  font-size: 13px; color: var(--text-sub); line-height: 1.4;
+  margin-top: 2px;
+}
+.task-meta {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 7px; flex-wrap: wrap;
+}
+.task-tag {
+  padding: 4px 8px; border-radius: 999px;
+  font-size: 11px; font-weight: 400; line-height: 1.4;
+  display: flex; align-items: center; gap: 3px;
+}
+.task-tag.time { background: var(--tag-time); color: var(--primary); }
+.task-tag.stat { background: var(--tag-stat-bg); color: var(--green); }
+.task-tag.stopped-tag { background: var(--stopped-bg); color: var(--stopped-color); }
+
+/* Arrow icon - using Figma asset */
+.task-arrow {
+  flex-shrink: 0; align-self: center;
+}
+.task-arrow img {
+  width: 32px; height: 32px;
+  display: block;
+}
+
+/* ═══ SWIPE ACTIONS ═══ */
+.swipe-actions {
+  position: absolute; right: 0; top: 0; bottom: 0;
+  display: flex; z-index: 1;
+}
+.swipe-btn {
+  width: 70px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 4px;
+  border: none; cursor: pointer;
+  font-family: var(--font); font-size: 12px; font-weight: 400;
+  color: #fff;
+}
+.swipe-btn img { width: 20px; height: 20px; filter: brightness(0) invert(1); }
+.swipe-btn.edit { background: #1FB4CF; }
+.swipe-btn.stop { background: var(--red); }
+.swipe-btn.resume { background: #52C97A; }
+
+/* ═══ STOPPED ITEM ═══ */
+.stopped-item .task-content { opacity: 0.65; }
+
+/* ═══ CONFIRM DIALOG ═══ */
+.dialog-overlay {
+  position: absolute; inset: 0; z-index: 100;
+  background: rgba(0,0,0,0); pointer-events: none;
+  transition: background .3s; border-radius: 44px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.dialog-overlay.show {
+  background: rgba(0,0,0,0.75); pointer-events: auto;
+}
+.dialog-box {
+  background: var(--card-bg); border-radius: 24px;
+  width: 345px;
+  transform: scale(0.9); opacity: 0;
+  transition: all .3s cubic-bezier(.34,1.2,.64,1);
+  overflow: hidden;
+}
+.dialog-overlay.show .dialog-box {
+  transform: scale(1); opacity: 1;
+}
+.dialog-body {
+  padding: 32px 24px 24px;
+  text-align: center;
+}
+.dialog-title {
+  font-size: 20px; font-weight: 400; color: var(--text-main);
+  line-height: 1.4; letter-spacing: -0.015em;
+}
+.dialog-desc {
+  font-size: 14px; color: var(--text-sub); margin-top: 16px;
+  line-height: 1.4;
+}
+.dialog-divider {
+  height: 1px; background: var(--border);
+}
+.dialog-actions {
+  display: flex; gap: 12px;
+  padding: 16px;
+}
+.dialog-btn {
+  flex: 1; padding: 12px 16px; border-radius: 34px;
+  font-family: var(--font); font-size: 16px; font-weight: 400;
+  cursor: pointer; border: none; transition: all .2s;
+  letter-spacing: -0.01em;
+}
+.dialog-btn.cancel {
+  background: #E7E6ED; color: var(--text-main);
+}
+.dialog-btn.confirm {
+  background: #F8837C; color: #fff;
+}
+.dialog-btn:active { transform: scale(.96); }
+
+/* Toast */
+.toast {
+  position: absolute; bottom: 100px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(40,39,55,0.9); color: #fff; border-radius: 12px;
+  padding: 10px 20px; font-size: 14px;
+  opacity: 0; transition: all .3s; pointer-events: none; z-index: 200;
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Home indicator */
+.home-indicator {
+  height: 34px; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.home-bar { width: 134px; height: 5px; background: #000; opacity: .12; border-radius: 100px; }
+
+/* Animations */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section { animation: slideIn .4s ease both; }
+.section:nth-child(2) { animation-delay: .05s; }
+.section:nth-child(3) { animation-delay: .15s; }
+.section:nth-child(4) { animation-delay: .25s; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="status-bar">
+    <span>9:41</span>
+    <span style="font-size:12px; display:flex; gap:4px; align-items:center;">
+      <svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="7" width="3" height="5" rx=".5" fill="#000"/><rect x="4" y="4" width="3" height="8" rx=".5" fill="#000"/><rect x="8" y="2" width="3" height="10" rx=".5" fill="#000"/><rect x="12" y="0" width="3" height="12" rx=".5" fill="#000"/></svg>
+      <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.5C10.7 2.5 13 3.8 14.5 6L13 7.5C11.8 5.8 10 4.5 8 4.5C6 4.5 4.2 5.8 3 7.5L1.5 6C3 3.8 5.3 2.5 8 2.5Z" fill="#000"/><circle cx="8" cy="10" r="1.5" fill="#000"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2" stroke="#000" stroke-width="1" fill="none"/><rect x="22" y="4" width="2" height="4" rx=".5" fill="#000"/><rect x="1.5" y="2.5" width="18" height="7.5" rx="1" fill="#000"/></svg>
+    </span>
+  </div>
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <button class="back-btn" onclick="window.location.href='task-intro.html'">
+      <img src="assets/icon-20-back.png" alt="返回">
+    </button>
+  </div>
+
+  <!-- Page content -->
+  <div class="page-content">
+    <!-- Title -->
+    <div class="page-title">亲子活动空间</div>
+
+    <!-- ═══ 进行中 ═══ -->
+    <div class="section">
+      <div class="section-label">进行中</div>
+      <div class="task-list" id="activeList">
+        <!-- 睡前故事 -->
+        <div class="task-item active-item" id="task-1" data-id="1" data-swiped="false">
+          <div class="swipe-actions">
+            <button class="swipe-btn edit" onclick="editActivity(1)">
+              <img src="assets/icon-20-edit.png" alt="修改">
+              修改
+            </button>
+            <button class="swipe-btn stop" onclick="confirmStop(1)">
+              <img src="assets/icon-20-trash.png" alt="停止">
+              停止
+            </button>
+          </div>
+          <div class="task-content" onclick="toggleSwipe(1, event)">
+            <div class="task-icon">
+              <img src="assets/icon-active-chat.png" alt="睡前故事">
+            </div>
+            <div class="task-body">
+              <div class="task-name">睡前故事</div>
+              <div class="task-desc">每天讲一个故事，培养想象力</div>
+              <div class="task-meta">
+                <span class="task-tag time">⏰ 每晚 21:00 ~ 21:30</span>
+                <span class="task-tag stat">已进行 5 次</span>
+              </div>
+            </div>
+            <div class="task-arrow">
+              <img src="assets/icon-arrow-right.svg" alt="查看">
+            </div>
+          </div>
+        </div>
+
+        <!-- 种星星 -->
+        <div class="task-item active-item" id="task-2" data-id="2" data-swiped="false">
+          <div class="swipe-actions">
+            <button class="swipe-btn edit" onclick="editActivity(2)">
+              <img src="assets/icon-20-edit.png" alt="修改">
+              修改
+            </button>
+            <button class="swipe-btn stop" onclick="confirmStop(2)">
+              <img src="assets/icon-20-trash.png" alt="停止">
+              停止
+            </button>
+          </div>
+          <div class="task-content" onclick="toggleSwipe(2, event)">
+            <div class="task-icon">
+              <img src="assets/icon-task-workout.png" alt="种星星">
+            </div>
+            <div class="task-body">
+              <div class="task-name">种星星</div>
+              <div class="task-desc">促进孩子情绪表达，增进亲子关系</div>
+              <div class="task-meta">
+                <span class="task-tag time">⏰ 每晚 19:30 ~ 20:00</span>
+                <span class="task-tag stat">已进行 2 次</span>
+              </div>
+            </div>
+            <div class="task-arrow">
+              <img src="assets/icon-arrow-right.svg" alt="查看">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 活动推荐 ═══ -->
+    <div class="section">
+      <div class="section-label">活动推荐</div>
+      <div class="task-list" id="recommendList">
+        <!-- 恐龙牙齿保卫战 -->
+        <div class="task-item recommend-item">
+          <div class="task-content" onclick="showToast('查看活动详情')">
+            <div class="task-icon">
+              <img src="assets/icon-task-chat.png" alt="恐龙牙齿保卫战">
+            </div>
+            <div class="task-body">
+              <div class="task-name">恐龙牙齿保卫战</div>
+              <div class="task-desc">将抗拒转为主动，建立睡前刷牙习惯</div>
+            </div>
+            <div class="task-arrow">
+              <img src="assets/icon-arrow-right.svg" alt="查看">
+            </div>
+          </div>
+        </div>
+
+        <!-- 社交破冰练习 -->
+        <div class="task-item recommend-item">
+          <div class="task-content" onclick="showToast('查看活动详情')">
+            <div class="task-icon">
+              <img src="assets/icon-task-chat.png" alt="社交破冰练习">
+            </div>
+            <div class="task-body">
+              <div class="task-name">社交破冰练习</div>
+              <div class="task-desc">找到适合孩子的社交方式，自信入场</div>
+            </div>
+            <div class="task-arrow">
+              <img src="assets/icon-arrow-right.svg" alt="查看">
+            </div>
+          </div>
+        </div>
+
+        <!-- 睡前悄悄话 -->
+        <div class="task-item recommend-item">
+          <div class="task-content" onclick="showToast('查看活动详情')">
+            <div class="task-icon">
+              <img src="assets/icon-task-chat.png" alt="睡前悄悄话">
+            </div>
+            <div class="task-body">
+              <div class="task-name">睡前悄悄话</div>
+              <div class="task-desc">10 分钟情绪认知练习，培养共情</div>
+            </div>
+            <div class="task-arrow">
+              <img src="assets/icon-arrow-right.svg" alt="查看">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 已停止 ═══ -->
+    <div class="section" id="stoppedSection">
+      <div class="section-label">已停止</div>
+      <div class="task-list" id="stoppedList">
+        <!-- 互换能量包 -->
+        <div class="task-item stopped-item" id="stopped-preset" data-id="preset" data-swiped="false">
+          <div class="swipe-actions">
+            <button class="swipe-btn resume" onclick="resumeActivity('preset')">
+              <img src="assets/icon-rotate-cw.png" alt="恢复">
+              恢复
+            </button>
+          </div>
+          <div class="task-content" onclick="toggleSwipeStopped('preset', event)">
+            <div class="task-icon">
+              <img src="assets/icon-stopped-task.png" alt="互换能量包">
+            </div>
+            <div class="task-body">
+              <div class="task-name">互换能量包</div>
+              <div class="task-desc">让孩子感受到父母的情感需求，增强亲子链接</div>
+              <div class="task-meta">
+                <span class="task-tag stopped-tag">已停止</span>
+              </div>
+            </div>
+            <div class="task-arrow">
+              <img src="assets/icon-arrow-right.svg" alt="查看">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-indicator"><div class="home-bar"></div></div>
+
+  <!-- Confirm dialog -->
+  <div class="dialog-overlay" id="dialogOverlay" onclick="closeDialog()">
+    <div class="dialog-box" onclick="event.stopPropagation()">
+      <div class="dialog-body">
+        <div class="dialog-title" id="dialogTitle">确定要停止"种星星"？</div>
+        <div class="dialog-desc" id="dialogDesc">停止后星仔不再主动邀请，<br>你可以随时重新开启。</div>
+      </div>
+      <div class="dialog-divider"></div>
+      <div class="dialog-actions">
+        <button class="dialog-btn cancel" onclick="closeDialog()">再想想</button>
+        <button class="dialog-btn confirm" id="dialogConfirm" onclick="doStop()">确定停止</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+// ─── Activity data ───
+const activities = {
+  1: { name: '睡前故事', desc: '每天讲一个故事，培养想象力', time: '每晚 21:00 ~ 21:30', stat: '已进行 5 次', icon: 'assets/icon-active-chat.png' },
+  2: { name: '种星星', desc: '促进孩子情绪表达，增进亲子关系', time: '每晚 19:30 ~ 20:00', stat: '已进行 2 次', icon: 'assets/icon-task-workout.png' }
+};
+
+let pendingStopId = null;
+
+// ─── Swipe toggle for active items ───
+function toggleSwipe(id, e) {
+  if (e && e.target.closest('.swipe-btn')) return;
+  const item = document.getElementById('task-' + id);
+  const content = item.querySelector('.task-content');
+  const isSwiped = item.dataset.swiped === 'true';
+
+  // Close all others
+  document.querySelectorAll('.active-item').forEach(el => {
+    if (el.id !== 'task-' + id) {
+      el.dataset.swiped = 'false';
+      el.querySelector('.task-content').classList.remove('swiped');
+    }
+  });
+
+  if (isSwiped) {
+    item.dataset.swiped = 'false';
+    content.classList.remove('swiped');
+  } else {
+    item.dataset.swiped = 'true';
+    content.classList.add('swiped');
+  }
+}
+
+// ─── Swipe toggle for stopped items ───
+function toggleSwipeStopped(id, e) {
+  if (e && e.target.closest('.swipe-btn')) return;
+  const item = document.getElementById('stopped-' + id);
+  if (!item) return;
+  const content = item.querySelector('.task-content');
+  const isSwiped = item.dataset.swiped === 'true';
+
+  document.querySelectorAll('.stopped-item').forEach(el => {
+    if (el.id !== 'stopped-' + id) {
+      el.dataset.swiped = 'false';
+      el.querySelector('.task-content')?.classList.remove('swiped');
+    }
+  });
+
+  if (isSwiped) {
+    item.dataset.swiped = 'false';
+    content.classList.remove('swiped');
+  } else {
+    item.dataset.swiped = 'true';
+    content.classList.add('swiped');
+  }
+}
+
+// Close swipe on scroll
+document.querySelector('.page-content').addEventListener('scroll', () => {
+  document.querySelectorAll('[data-swiped="true"]').forEach(el => {
+    el.dataset.swiped = 'false';
+    el.querySelector('.task-content')?.classList.remove('swiped');
+  });
+});
+
+// ─── Touch swipe ───
+function initTouchSwipe(item) {
+  const content = item.querySelector('.task-content');
+  let startX = 0, currentX = 0, isDragging = false;
+
+  content.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+    content.style.transition = 'none';
+  });
+
+  content.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    currentX = e.touches[0].clientX;
+    let dx = currentX - startX;
+    if (item.dataset.swiped === 'true') dx -= 140;
+    dx = Math.max(-140, Math.min(0, dx));
+    content.style.transform = `translateX(${dx}px)`;
+  });
+
+  content.addEventListener('touchend', () => {
+    isDragging = false;
+    content.style.transition = '';
+    const dx = currentX - startX;
+    if (dx < -50) {
+      item.dataset.swiped = 'true';
+      content.classList.add('swiped');
+    } else {
+      item.dataset.swiped = 'false';
+      content.classList.remove('swiped');
+    }
+    content.style.transform = '';
+    if (item.dataset.swiped === 'true') content.classList.add('swiped');
+  });
+}
+
+document.querySelectorAll('.task-item[data-swiped]').forEach(initTouchSwipe);
+
+// ─── Edit activity ───
+function editActivity(id) {
+  showToast('编辑 ' + activities[id].name + ' 设置');
+  const item = document.getElementById('task-' + id);
+  item.dataset.swiped = 'false';
+  item.querySelector('.task-content').classList.remove('swiped');
+}
+
+// ─── Stop confirmation ───
+function confirmStop(id) {
+  pendingStopId = id;
+  const a = activities[id];
+  document.getElementById('dialogTitle').textContent = '确定要停止"' + a.name + '"？';
+  document.getElementById('dialogOverlay').classList.add('show');
+  const item = document.getElementById('task-' + id);
+  item.dataset.swiped = 'false';
+  item.querySelector('.task-content').classList.remove('swiped');
+}
+
+function closeDialog() {
+  document.getElementById('dialogOverlay').classList.remove('show');
+  pendingStopId = null;
+}
+
+function doStop() {
+  if (!pendingStopId) return;
+  const id = pendingStopId;
+  const a = activities[id];
+  closeDialog();
+
+  const item = document.getElementById('task-' + id);
+  item.style.transition = 'all .3s';
+  item.style.opacity = '0';
+  item.style.maxHeight = item.offsetHeight + 'px';
+  setTimeout(() => {
+    item.style.maxHeight = '0';
+    item.style.padding = '0';
+    item.style.margin = '0';
+    item.style.borderBottom = 'none';
+  }, 50);
+
+  setTimeout(() => {
+    item.remove();
+
+    const stoppedSection = document.getElementById('stoppedSection');
+    stoppedSection.style.display = '';
+    const stoppedList = document.getElementById('stoppedList');
+
+    const newId = 'stopped-' + id;
+    const div = document.createElement('div');
+    div.className = 'task-item stopped-item';
+    div.id = newId;
+    div.dataset.id = id;
+    div.dataset.swiped = 'false';
+    div.innerHTML = `
+      <div class="swipe-actions">
+        <button class="swipe-btn resume" onclick="resumeActivity(${id})">
+          <img src="assets/icon-rotate-cw.png" alt="恢复">
+          恢复
+        </button>
+      </div>
+      <div class="task-content" onclick="toggleSwipeStopped(${id}, event)">
+        <div class="task-icon">
+          <img src="assets/icon-stopped-task.png" alt="${a.name}">
+        </div>
+        <div class="task-body">
+          <div class="task-name">${a.name}</div>
+          <div class="task-desc">${a.desc}</div>
+          <div class="task-meta">
+            <span class="task-tag stopped-tag">已停止</span>
+          </div>
+        </div>
+        <div class="task-arrow">
+          <img src="assets/icon-arrow-right.svg" alt="查看">
+        </div>
+      </div>
+    `;
+    stoppedList.appendChild(div);
+    initTouchSwipe(div);
+    showToast(a.name + ' 已停止');
+  }, 350);
+}
+
+// ─── Resume activity ───
+function resumeActivity(id) {
+  const item = document.getElementById('stopped-' + id);
+  if (!item) return;
+
+  item.style.transition = 'all .3s';
+  item.style.opacity = '0';
+  setTimeout(() => {
+    item.remove();
+    const stoppedList = document.getElementById('stoppedList');
+    if (stoppedList.children.length === 0) {
+      document.getElementById('stoppedSection').style.display = 'none';
+    }
+  }, 300);
+
+  const name = id === 'preset' ? '互换能量包' : (activities[id]?.name || '活动');
+  showToast(name + ' 已重新开启 ✨');
+}
+
+// ─── Toast ───
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+</script>
+</body>
+</html>

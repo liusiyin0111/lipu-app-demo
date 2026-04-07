@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="393" height="852" viewBox="0 0 393 852" fill="none">
+  <defs>
+    <linearGradient id="ctaGlow" x1="196" y1="730" x2="196" y2="774" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7168D6"/>
+      <stop offset="1" stop-color="#6057C4"/>
+    </linearGradient>
+    <filter id="ctaShadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#7168D6" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Page Background -->
+  <rect width="393" height="852" rx="44" fill="#F8F5EF"/>
+
+  <!-- Overlay -->
+  <rect width="393" height="852" rx="44" fill="#000000" fill-opacity="0.3"/>
+
+  <!-- ══ BOTTOM SHEET (scrolled state) ══ -->
+  <g id="BottomSheet_Scrolled">
+    <rect x="0" y="46" width="393" height="806" rx="32" fill="#F8F5EF"/>
+
+    <!-- Handle Bar -->
+    <rect x="178" y="56" width="36" height="5" rx="2.5" fill="#000000" fill-opacity="0.1"/>
+
+    <!-- ── Three Steps (top portion visible after scroll) ── -->
+    <g id="StepsRow_Partial">
+      <!-- Step 1: Rose (partially visible at top) -->
+      <rect x="20" y="72" width="113" height="50" rx="16" fill="#FFF5F5" stroke="#000000" stroke-opacity="0.04"/>
+      <text x="76" y="104" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#282737" text-anchor="middle">种一朵玫瑰</text>
+
+      <!-- Step 2: Thorn -->
+      <rect x="140" y="72" width="113" height="50" rx="16" fill="#FFFBF0" stroke="#000000" stroke-opacity="0.04"/>
+      <text x="196" y="104" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#282737" text-anchor="middle">种一根小刺</text>
+
+      <!-- Step 3: Bud -->
+      <rect x="260" y="72" width="113" height="50" rx="16" fill="#F0FFF5" stroke="#000000" stroke-opacity="0.04"/>
+      <text x="316" y="104" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#282737" text-anchor="middle">种一颗小芽</text>
+    </g>
+
+    <!-- Steps Note -->
+    <g id="StepsNote">
+      <rect x="20" y="136" width="353" height="66" rx="14" fill="#F9F9FC" stroke="#000000" stroke-opacity="0.03"/>
+      <text x="34" y="163" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#424245">你和孩子<tspan font-weight="500" fill="#282737">轮流说</tspan>，星仔来主持引导 ✨</text>
+      <text x="34" y="187" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#424245">不需要准备任何东西，<tspan font-weight="500" fill="#282737">聊天就行</tspan>。</text>
+    </g>
+
+    <!-- After Card -->
+    <g id="AfterCard">
+      <rect x="20" y="218" width="353" height="66" rx="16" fill="#7168D6" fill-opacity="0.04" stroke="#7168D6" stroke-opacity="0.1"/>
+      <text x="44" y="252" font-family="Apple Color Emoji, sans-serif" font-size="28">🎨</text>
+      <text x="82" y="245" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#424245">种完之后，星仔会画一幅 <tspan font-weight="500" fill="#282737">"星光画"</tspan></text>
+      <text x="82" y="267" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#424245">第二天早上在成长日记里等你 📔</text>
+    </g>
+
+    <!-- ── Why Section ── -->
+    <g id="WhySection">
+      <text x="20" y="318" font-family="PingFang SC, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#424245">💡 为什么家长都在种星星？</text>
+
+      <!-- Item 1: Expression -->
+      <g id="Why_Expression">
+        <rect x="20" y="334" width="36" height="36" rx="12" fill="#F8837C" fill-opacity="0.1"/>
+        <text x="28" y="358" font-family="Apple Color Emoji, sans-serif" font-size="18">🧒</text>
+        <text x="66" y="350" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#282737">孩子学会了表达</text>
+        <text x="66" y="370" font-family="PingFang SC, -apple-system, sans-serif" font-size="13" fill="#424245">"开心""不开心"说出来，比憋着强一百倍</text>
+      </g>
+
+      <!-- Item 2: Bonding -->
+      <g id="Why_Bonding">
+        <rect x="20" y="392" width="36" height="36" rx="12" fill="#7168D6" fill-opacity="0.08"/>
+        <text x="29" y="416" font-family="Apple Color Emoji, sans-serif" font-size="18">💛</text>
+        <text x="66" y="408" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#282737">亲子更亲了</text>
+        <text x="66" y="428" font-family="PingFang SC, -apple-system, sans-serif" font-size="13" fill="#424245">每天 10 分钟高质量陪伴，比 1 小时</text>
+        <text x="66" y="446" font-family="PingFang SC, -apple-system, sans-serif" font-size="13" fill="#424245">"在旁边看手机"有用</text>
+      </g>
+
+      <!-- Item 3: Growth -->
+      <g id="Why_Growth">
+        <rect x="20" y="464" width="36" height="36" rx="12" fill="#92E27C" fill-opacity="0.1"/>
+        <text x="28" y="488" font-family="Apple Color Emoji, sans-serif" font-size="18">📔</text>
+        <text x="66" y="480" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#282737">成长看得见</text>
+        <text x="66" y="500" font-family="PingFang SC, -apple-system, sans-serif" font-size="13" fill="#424245">每天一幅星光画，翻回去看特别感动</text>
+      </g>
+    </g>
+
+    <!-- ── Relate Section ── -->
+    <g id="RelateSection">
+      <rect x="20" y="526" width="353" height="90" rx="14" fill="#F9F5EC" stroke="#000000" stroke-opacity="0.03"/>
+      <text x="34" y="550" font-family="PingFang SC, -apple-system, sans-serif" font-size="12" fill="#424245">💬 和你的选择有关</text>
+      <text x="34" y="574" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#282737">你选了 <tspan font-weight="600" fill="#7168D6">情绪认知与管理</tspan> 方向——</text>
+      <text x="34" y="598" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#282737">种星星的 🌵 环节帮糯糯学会安全地说出"不开心"。</text>
+    </g>
+
+    <!-- ── Social Proof ── -->
+    <g id="SocialProof">
+      <!-- Card 1 -->
+      <rect x="20" y="634" width="113" height="72" rx="14" fill="#FFFFFF" stroke="#000000" stroke-opacity="0.04"/>
+      <text x="76" y="662" font-family="PingFang SC, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#7168D6" text-anchor="middle">92%</text>
+      <text x="76" y="682" font-family="PingFang SC, -apple-system, sans-serif" font-size="11" fill="#424245" text-anchor="middle">家长坚持一周</text>
+
+      <!-- Card 2 -->
+      <rect x="140" y="634" width="113" height="72" rx="14" fill="#FFFFFF" stroke="#000000" stroke-opacity="0.04"/>
+      <text x="196" y="662" font-family="PingFang SC, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#7168D6" text-anchor="middle">87%</text>
+      <text x="196" y="682" font-family="PingFang SC, -apple-system, sans-serif" font-size="11" fill="#424245" text-anchor="middle">第一天就有分享</text>
+
+      <!-- Card 3 -->
+      <rect x="260" y="634" width="113" height="72" rx="14" fill="#FFFFFF" stroke="#000000" stroke-opacity="0.04"/>
+      <text x="316" y="662" font-family="PingFang SC, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#7168D6" text-anchor="middle">4.9</text>
+      <text x="316" y="682" font-family="PingFang SC, -apple-system, sans-serif" font-size="11" fill="#424245" text-anchor="middle">家长评分</text>
+    </g>
+
+    <!-- ── CTA Area ── -->
+    <g id="CTAArea">
+      <rect x="20" y="730" width="353" height="50" rx="25" fill="url(#ctaGlow)" filter="url(#ctaShadow)"/>
+      <text x="196" y="760" font-family="PingFang SC, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#FFFFFF" text-anchor="middle">🌟 今晚就种一颗星星</text>
+
+      <!-- Links -->
+      <text x="144" y="804" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#424245">先看看别的</text>
+      <text x="227" y="804" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#000000" fill-opacity="0.12">·</text>
+      <text x="242" y="804" font-family="PingFang SC, -apple-system, sans-serif" font-size="14" fill="#424245">了解更多</text>
+    </g>
+  </g>
+</svg>

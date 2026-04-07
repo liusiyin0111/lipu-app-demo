@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>梨谱 · 种星星</title>
+<link href="https://fonts.googleapis.cn/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1A1535;
+  --bg-gradient: linear-gradient(180deg, #1A1535 0%, #2D1B4E 40%, #1A1535 100%);
+  --primary: #7168D6;
+  --primary-lt: #9B93FF;
+  --accent-rose: #FF7EB3;
+  --accent-thorn: #8B9DC3;
+  --accent-bud: #7ECBA1;
+  --t1: #FFFFFF;
+  --t2: rgba(255,255,255,0.7);
+  --t3: rgba(255,255,255,0.4);
+  --bubble-ai: rgba(255,255,255,0.1);
+  --bubble-ai-border: rgba(255,255,255,0.15);
+  --bubble-child: rgba(126,203,161,0.2);
+  --bubble-child-border: rgba(126,203,161,0.3);
+  --bubble-parent: rgba(255,126,179,0.15);
+  --bubble-parent-border: rgba(255,126,179,0.3);
+  --font: 'Noto Sans SC', 'PingFang SC', -apple-system, system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body {
+  height: 100%; background: #0D0B1A;
+  font-family: var(--font); overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── Phone Frame ── */
+.phone-frame {
+  width: 393px; height: 852px;
+  background: var(--bg);
+  border-radius: 44px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 0 0 8px #0D0B1A, 0 0 0 10px #1E1A35, 0 0 60px rgba(113,104,214,0.2);
+  display: flex; flex-direction: column;
+}
+
+/* ── Stars ── */
+.stars-bg {
+  position: absolute; inset: 0;
+  background: var(--bg-gradient);
+  overflow: hidden; z-index: 0;
+}
+.star {
+  position: absolute; width: 2px; height: 2px;
+  background: #fff; border-radius: 50%;
+  animation: twinkle var(--dur, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.5); }
+}
+.moon {
+  position: absolute; top: 80px; right: 40px;
+  width: 50px; height: 50px;
+  background: radial-gradient(circle at 35% 35%, #FFF8DC, #FFE4A8);
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(255,232,168,0.4), 0 0 60px rgba(255,232,168,0.15);
+  z-index: 1;
+}
+.moon::after {
+  content: ''; position: absolute;
+  top: 5px; left: 12px; width: 40px; height: 40px;
+  background: var(--bg); border-radius: 50%; opacity: 0.85;
+}
+
+/* ── Status Bar ── */
+.status-bar {
+  height: 54px; padding: 14px 28px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 15px; font-weight: 600; color: var(--t1);
+  flex-shrink: 0; z-index: 10;
+}
+.status-icons { display: flex; gap: 4px; align-items: center; font-size: 12px; }
+
+/* ── Top Bar ── */
+.top-bar {
+  height: 50px; padding: 0 20px;
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0; z-index: 10;
+}
+.top-back { font-size: 20px; color: var(--t1); cursor: pointer; width: 32px; opacity: 0.7; }
+.top-title {
+  font-size: 17px; font-weight: 600; color: var(--t1);
+  flex: 1; text-align: center;
+}
+.top-action { width: 32px; text-align: right; font-size: 18px; color: var(--t2); cursor: pointer; }
+
+/* ── Phase Banner ── */
+.phase-banner {
+  padding: 8px 24px;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10; flex-shrink: 0;
+  opacity: 0; transform: translateY(-10px);
+  transition: all 0.5s ease;
+}
+.phase-banner.show { opacity: 1; transform: translateY(0); }
+.phase-pill {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px; padding: 6px 16px;
+  font-size: 12px; color: var(--t2);
+  backdrop-filter: blur(10px);
+}
+
+/* ── Chat Area ── */
+.chat-area {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  padding: 12px 20px 20px;
+  z-index: 5; position: relative;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+.chat-area::-webkit-scrollbar { display: none; }
+
+/* ── Messages ── */
+.msg {
+  display: flex; gap: 10px;
+  margin-bottom: 14px;
+  opacity: 0; transform: translateY(16px);
+  animation: msgIn 0.5s ease forwards;
+}
+@keyframes msgIn { to { opacity: 1; transform: translateY(0); } }
+.msg-right { flex-direction: row-reverse; }
+
+.msg-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.msg-bubble {
+  max-width: 78%; padding: 12px 16px;
+  font-size: 15px; line-height: 1.6;
+  color: var(--t1);
+  border-radius: 20px 20px 20px 4px;
+  backdrop-filter: blur(20px);
+}
+.msg-right .msg-bubble { border-radius: 20px 20px 4px 20px; }
+.bubble-ai { background: var(--bubble-ai); border: 1px solid var(--bubble-ai-border); }
+.bubble-child { background: var(--bubble-child); border: 1px solid var(--bubble-child-border); }
+.bubble-parent { background: var(--bubble-parent); border: 1px solid var(--bubble-parent-border); }
+.msg-speaker {
+  font-size: 11px; font-weight: 600;
+  margin-bottom: 4px; opacity: 0.6; letter-spacing: 0.5px;
+}
+
+/* ── Emoji Float ── */
+.emoji-float {
+  position: fixed; font-size: 28px;
+  animation: emojiUp 1.5s ease forwards;
+  pointer-events: none; z-index: 999;
+}
+@keyframes emojiUp {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-120px) scale(1.4); }
+}
+
+/* ── Typing ── */
+.typing { display: flex; gap: 4px; padding: 4px 0; }
+.typing-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--t3); animation: bounce 1.2s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+
+/* ── Gen Card ── */
+.gen-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px; overflow: hidden; margin-top: 8px;
+}
+.gen-progress { height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin: 12px 16px 0; overflow: hidden; }
+.gen-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent-rose)); border-radius: 2px; transition: width 0.3s ease; }
+.gen-status { padding: 10px 16px 14px; font-size: 12px; color: var(--t3); }
+.gen-image { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #2D1B4E, #1A1535); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.gen-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; }
+.gen-image img.loaded { opacity: 1; }
+.gen-placeholder { position: absolute; font-size: 40px; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.8; } }
+
+/* ── Divider ── */
+.date-divider {
+  text-align: center; margin: 16px 0;
+  font-size: 12px; color: var(--t3);
+  display: flex; align-items: center; gap: 12px;
+}
+.date-divider::before, .date-divider::after {
+  content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.08);
+}
+
+/* ── Bottom Bar ── */
+.bottom-bar {
+  padding: 12px 20px 32px;
+  z-index: 10; flex-shrink: 0;
+  backdrop-filter: blur(20px);
+  background: rgba(26,21,53,0.8);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.bottom-hint { text-align: center; font-size: 11px; color: var(--t3); margin-bottom: 10px; }
+.bottom-actions { display: flex; gap: 10px; justify-content: center; }
+.action-btn {
+  padding: 12px 24px; border-radius: 999px; border: none;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  font-family: var(--font); transition: all 0.3s ease;
+  display: flex; align-items: center; gap: 6px;
+}
+.action-btn:active { transform: scale(0.95); }
+.action-btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 20px rgba(113,104,214,0.4); }
+.action-btn-secondary { background: rgba(255,255,255,0.08); color: var(--t2); border: 1px solid rgba(255,255,255,0.12); }
+.action-btn-glow { animation: btnGlow 2s ease-in-out infinite; }
+@keyframes btnGlow { 0%, 100% { box-shadow: 0 4px 20px rgba(113,104,214,0.4); } 50% { box-shadow: 0 4px 30px rgba(113,104,214,0.6); } }
+
+/* ── Journal Page Overlay ── */
+.journal-overlay {
+  position: absolute; inset: 0; z-index: 100;
+  background: #F8F5EF;
+  display: flex; flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+  border-radius: 44px;
+  overflow: hidden;
+}
+.journal-overlay.show { transform: translateY(0); }
+
+.journal-page-bar {
+  height: 54px; padding: 14px 28px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 15px; font-weight: 600; color: #1A1A2E;
+}
+.journal-top {
+  height: 50px; padding: 0 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.journal-top-back { font-size: 20px; color: #1A1A2E; cursor: pointer; width: 32px; }
+.journal-top-title { font-size: 17px; font-weight: 600; color: #1A1A2E; flex: 1; text-align: center; }
+.journal-top-share { font-size: 14px; color: #7168D6; cursor: pointer; font-weight: 600; }
+
+.journal-body {
+  flex: 1; overflow-y: auto; padding: 0 0 40px;
+  -webkit-overflow-scrolling: touch;
+}
+.journal-hero {
+  width: 100%; aspect-ratio: 16/10;
+  overflow: hidden; position: relative;
+}
+.journal-hero img { width: 100%; height: 100%; object-fit: cover; }
+.journal-hero-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.5));
+  color: #fff;
+}
+.journal-hero-date { font-size: 12px; opacity: 0.8; margin-bottom: 4px; }
+.journal-hero-title { font-size: 20px; font-weight: 700; }
+
+.journal-section {
+  padding: 20px 24px 0;
+}
+.journal-section-title {
+  font-size: 13px; font-weight: 600; color: #9A9AB0;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.journal-entry {
+  background: #fff; border-radius: 16px;
+  padding: 16px; margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.journal-entry-emoji { font-size: 24px; margin-bottom: 8px; }
+.journal-entry-label {
+  font-size: 12px; color: #9A9AB0; font-weight: 600;
+  margin-bottom: 4px;
+}
+.journal-entry-text {
+  font-size: 15px; color: #1A1A2E; line-height: 1.6;
+}
+.journal-entry-speaker {
+  display: inline-block; padding: 2px 8px;
+  border-radius: 6px; font-size: 11px; font-weight: 600;
+  margin-bottom: 6px;
+}
+.speaker-child { background: rgba(126,203,161,0.15); color: #3D8B5F; }
+.speaker-parent { background: rgba(255,126,179,0.1); color: #C9547A; }
+
+.journal-insight {
+  background: linear-gradient(135deg, rgba(113,104,214,0.08), rgba(155,147,255,0.05));
+  border: 1px solid rgba(113,104,214,0.12);
+  border-radius: 16px; padding: 16px;
+  margin: 0 24px 16px;
+}
+.journal-insight-title {
+  font-size: 13px; font-weight: 600; color: #7168D6;
+  margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+}
+.journal-insight-text { font-size: 14px; color: #5C5C7A; line-height: 1.6; }
+
+.journal-save-bar {
+  padding: 16px 24px 32px;
+  display: flex; gap: 10px;
+}
+.journal-save-btn {
+  flex: 1; padding: 14px; border-radius: 14px; border: none;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  font-family: var(--font); transition: all 0.2s;
+}
+.journal-save-primary { background: #7168D6; color: #fff; }
+.journal-save-secondary { background: rgba(113,104,214,0.08); color: #7168D6; }
+.journal-save-btn:active { transform: scale(0.97); }
+
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="phone-frame">
+  <div class="stars-bg" id="starsBg"></div>
+  <div class="moon"></div>
+
+  <div class="status-bar" id="statusBar">
+    <span id="statusTime">20:32</span>
+    <span class="status-icons">📶 🔋</span>
+  </div>
+
+  <div class="top-bar" id="topBar">
+    <div class="top-back">‹</div>
+    <div class="top-title">🌟 种星星</div>
+    <div class="top-action">⚙</div>
+  </div>
+
+  <div class="phase-banner" id="phaseBanner">
+    <div class="phase-pill" id="phasePill"></div>
+  </div>
+
+  <div class="chat-area" id="chatArea"></div>
+
+  <div class="bottom-bar" id="bottomBar">
+    <div class="bottom-hint">种星星 · 和糯糯一起分享今天的故事</div>
+    <div class="bottom-actions" id="bottomActions">
+      <button class="action-btn action-btn-primary action-btn-glow" id="startBtn" onclick="startDemo()">
+        🌟 开始种星星
+      </button>
+    </div>
+  </div>
+
+  <!-- Journal Detail Overlay -->
+  <div class="journal-overlay" id="journalOverlay">
+    <div class="journal-page-bar">
+      <span>09:15</span>
+      <span class="status-icons" style="color:#1A1A2E;">📶 🔋</span>
+    </div>
+    <div class="journal-top">
+      <div class="journal-top-back" onclick="closeJournal()">‹</div>
+      <div class="journal-top-title">成长日记</div>
+      <div class="journal-top-share" onclick="floatEmoji('📤')">分享</div>
+    </div>
+    <div class="journal-body" id="journalBody"></div>
+  </div>
+</div>
+
+<script>
+// ── Stars ──
+const starsBg = document.getElementById('starsBg');
+for (let i = 0; i < 60; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  s.style.left = Math.random() * 100 + '%';
+  s.style.top = Math.random() * 100 + '%';
+  s.style.setProperty('--dur', (2 + Math.random() * 4) + 's');
+  s.style.setProperty('--delay', Math.random() * 3 + 's');
+  if (Math.random() > 0.7) { s.style.width = '3px'; s.style.height = '3px'; }
+  starsBg.appendChild(s);
+}
+
+const chatArea = document.getElementById('chatArea');
+
+function scrollBottom() { setTimeout(() => { chatArea.scrollTop = chatArea.scrollHeight; }, 100); }
+function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function showPhase(text) {
+  const b = document.getElementById('phaseBanner');
+  document.getElementById('phasePill').textContent = text;
+  b.classList.add('show');
+  setTimeout(() => b.classList.remove('show'), 4000);
+}
+
+function floatEmoji(e) {
+  const el = document.createElement('div');
+  el.className = 'emoji-float'; el.textContent = e;
+  el.style.left = (30 + Math.random() * 40) + '%'; el.style.bottom = '20%';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1500);
+}
+
+// ── Add Message (no more html:true bug) ──
+function addMsg(type, content, opts = {}) {
+  return new Promise(resolve => {
+    const { emoji, delay = 0 } = opts;
+    setTimeout(() => {
+      const msg = document.createElement('div');
+      const isRight = type === 'child' || type === 'parent';
+      msg.className = `msg ${isRight ? 'msg-right' : ''}`;
+
+      let av = '🌟', bc = 'bubble-ai', sp = '';
+      if (type === 'child') { av = '🧒'; bc = 'bubble-child'; sp = '糯糯'; }
+      if (type === 'parent') { av = '👩'; bc = 'bubble-parent'; sp = '妈妈'; }
+
+      const bubble = document.createElement('div');
+      bubble.className = `msg-bubble ${bc}`;
+      if (sp) {
+        const spEl = document.createElement('div');
+        spEl.className = 'msg-speaker';
+        spEl.textContent = sp;
+        bubble.appendChild(spEl);
+      }
+
+      // Always insert as innerHTML to support <b>, <br> etc.
+      const textNode = document.createElement('span');
+      textNode.innerHTML = content;
+      bubble.appendChild(textNode);
+
+      const avEl = document.createElement('div');
+      avEl.className = 'msg-avatar';
+      avEl.textContent = av;
+
+      if (isRight) {
+        msg.appendChild(avEl);
+        msg.appendChild(bubble);
+      } else {
+        msg.appendChild(avEl);
+        msg.appendChild(bubble);
+      }
+
+      chatArea.appendChild(msg);
+      scrollBottom();
+      if (emoji) setTimeout(() => floatEmoji(emoji), 300);
+      setTimeout(resolve, 200);
+    }, delay);
+  });
+}
+
+function addTyping() {
+  const msg = document.createElement('div');
+  msg.className = 'msg'; msg.id = 'typingMsg';
+  msg.innerHTML = `<div class="msg-avatar">🌟</div><div class="msg-bubble bubble-ai"><div class="typing"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  chatArea.appendChild(msg);
+  scrollBottom();
+}
+function removeTyping() { const e = document.getElementById('typingMsg'); if (e) e.remove(); }
+
+function addDivider(text) {
+  const d = document.createElement('div');
+  d.className = 'date-divider';
+  d.textContent = text;
+  chatArea.appendChild(d);
+  scrollBottom();
+}
+
+function updateBottom(hint, buttons) {
+  document.querySelector('.bottom-hint').textContent = hint;
+  document.getElementById('bottomActions').innerHTML = buttons.map(b =>
+    `<button class="action-btn ${b.cls}" onclick="${b.onclick}">${b.label}</button>`
+  ).join('');
+}
+
+// ── Journal page ──
+function showJournal() {
+  const imgSrc = 'starlight-painting.png';
+  document.getElementById('journalBody').innerHTML = `
+    <div class="journal-hero">
+      <img src="${imgSrc}" alt="星光画">
+      <div class="journal-hero-overlay">
+        <div class="journal-hero-date">2026年4月4日 · 星期六</div>
+        <div class="journal-hero-title">公园探险与一片秋叶 🍂</div>
+      </div>
+    </div>
+
+    <div class="journal-section">
+      <div class="journal-section-title">🌹 今天的玫瑰</div>
+      <div class="journal-entry">
+        <div class="journal-entry-speaker speaker-child">🧒 糯糯</div>
+        <div class="journal-entry-text">去公园滑了好长好长的滑梯，滑了好多次！还捡到一片超级漂亮的叶子，像太阳一样金黄金黄的！</div>
+      </div>
+      <div class="journal-entry">
+        <div class="journal-entry-speaker speaker-parent">👩 妈妈</div>
+        <div class="journal-entry-text">看到糯糯勇敢地爬上了那个最高的大滑梯，之前一直不敢呢，今天自己就上去了！</div>
+      </div>
+    </div>
+
+    <div class="journal-section">
+      <div class="journal-section-title">🌵 今天的小刺</div>
+      <div class="journal-entry">
+        <div class="journal-entry-speaker speaker-child">🧒 糯糯</div>
+        <div class="journal-entry-text">乐乐不让我玩她的跳绳...</div>
+      </div>
+      <div class="journal-entry">
+        <div class="journal-entry-speaker speaker-parent">👩 妈妈</div>
+        <div class="journal-entry-text">工作上的会开得太久了，差点没赶上接糯糯</div>
+      </div>
+    </div>
+
+    <div class="journal-section">
+      <div class="journal-section-title">🌱 明天的小芽</div>
+      <div class="journal-entry">
+        <div class="journal-entry-speaker speaker-child">🧒 糯糯</div>
+        <div class="journal-entry-text">奶奶说明天带我去看金鱼！🐠</div>
+      </div>
+      <div class="journal-entry">
+        <div class="journal-entry-speaker speaker-parent">👩 妈妈</div>
+        <div class="journal-entry-text">打算把糯糯捡的叶子做成书签，给她一个惊喜</div>
+      </div>
+    </div>
+
+    <div class="journal-section">
+      <div class="journal-section-title">💛 妈妈的发现</div>
+      <div class="journal-entry">
+        <div class="journal-entry-text" style="color:#C9547A;">糯糯捡到那片叶子以后，小心翼翼地放进口袋里说要带回家给妈妈。宝贝真的好贴心！</div>
+      </div>
+    </div>
+
+    <div class="journal-insight">
+      <div class="journal-insight-title">💡 星仔观察</div>
+      <div class="journal-insight-text">糯糯今天在公园独立挑战了高滑梯，说明她在安全环境中的自信心正在增长。社交方面，"乐乐不让我玩跳绳"的分享值得关注——这是她开始在意同伴关系的信号。建议在未来几天通过角色扮演游戏，帮助她练习"怎么请求加入"的表达方式。</div>
+    </div>
+
+    <div class="journal-save-bar">
+      <button class="journal-save-btn journal-save-primary" onclick="floatEmoji('💾')">保存图片到相册</button>
+      <button class="journal-save-btn journal-save-secondary" onclick="floatEmoji('📤')">分享给家人</button>
+    </div>
+  `;
+  document.getElementById('journalOverlay').classList.add('show');
+}
+
+function closeJournal() {
+  document.getElementById('journalOverlay').classList.remove('show');
+}
+
+// ── Main Demo Flow ──
+async function startDemo() {
+  document.getElementById('startBtn').style.display = 'none';
+  updateBottom('种星星进行中...', []);
+
+  // ── Opening ──
+  addTyping(); await wait(1200); removeTyping();
+  await addMsg('ai', '糯糯！🌟 种星星时间到啦～');
+  await wait(700);
+
+  addTyping(); await wait(1000); removeTyping();
+  await addMsg('ai', '今晚我们要在夜空里种三颗星星！✨');
+  await wait(500);
+
+  addTyping(); await wait(800); removeTyping();
+  await addMsg('ai', '一颗 <b>玫瑰星</b> 🌹 — 今天最开心的事！<br>一颗 <b>小刺星</b> 🌵 — 今天不太开心的事<br>一颗 <b>许愿星</b> 🌱 — 明天最期待的事！<br><br>糯糯和妈妈轮流种，好不好？');
+  await wait(1500);
+
+  await addMsg('child', '好！我要种好多星星！🌟🌟🌟', { emoji: '🎉' });
+  await wait(800);
+
+  addTyping(); await wait(600); removeTyping();
+  await addMsg('ai', '哈哈好！那我们开始种第一朵——');
+  await wait(500);
+
+  // ═══════════ 🌹 ROSE ROUND ═══════════
+  addDivider('🌹 种一朵玫瑰');
+  showPhase('🌹 第一轮 · 今天最开心的事');
+  await wait(400);
+
+  addTyping(); await wait(600); removeTyping();
+  await addMsg('ai', '糯糯先来！今天什么事让你最开心？种一朵大大的玫瑰！🌹');
+  await wait(2000);
+
+  await addMsg('child', '今天我们去公园了！我滑了那个好高好高的滑梯！以前我不敢的，今天我自己爬上去了！然后我还捡到一片叶子，超级漂亮！金色的！像太阳！', { emoji: '🌹' });
+  await wait(1200);
+
+  addTyping(); await wait(800); removeTyping();
+  await addMsg('ai', '天哪！你自己爬上了那个大滑梯？！以前不敢、今天自己上去了！这朵玫瑰好大呀！🌹✨<br><br>那片金色的叶子呢？在哪里？');
+  await wait(1500);
+
+  await addMsg('child', '在我口袋里！我要带回家给妈妈看！');
+  await wait(800);
+
+  addTyping(); await wait(600); removeTyping();
+  await addMsg('ai', '好贴心！🥰 轮到妈妈了——妈妈今天的玫瑰🌹是什么？');
+  await wait(2000);
+
+  await addMsg('parent', '妈妈今天最开心的就是看到糯糯自己爬上了那个大滑梯！之前你一直站在下面看别人滑，今天竟然自己上去了，妈妈好骄傲！', { emoji: '🌹' });
+  await wait(1000);
+
+  addTyping(); await wait(800); removeTyping();
+  await addMsg('ai', '你们俩的玫瑰是同一件事呢！一个勇敢爬上去，一个在下面骄傲地看着 🥹 这朵玫瑰好暖呀～');
+  await wait(1000);
+
+  // ═══════════ 🌵 THORN ROUND ═══════════
+  addDivider('🌵 种一根小刺');
+  showPhase('🌵 第二轮 · 今天不太开心的事');
+  await wait(400);
+
+  addTyping(); await wait(600); removeTyping();
+  await addMsg('ai', '现在种一根小刺🌵——今天有没有什么不太开心的事？没有的话也可以说"今天没有刺"哦！<br><br>糯糯先来～');
+  await wait(2200);
+
+  await addMsg('child', '嗯...乐乐不让我玩她的跳绳。我说我也想试试，她说不行...', { emoji: '🌵' });
+  await wait(1000);
+
+  addTyping(); await wait(1000); removeTyping();
+  await addMsg('ai', '想一起玩但是被拒绝了，那种感觉确实像被刺扎了一下呢。谢谢你告诉我们。<br><br>我们把这根小刺种在花园的角落里，然后继续往前走好不好？<br><br>妈妈今天有小刺吗？');
+  await wait(2000);
+
+  await addMsg('parent', '妈妈今天也有一根小刺——工作上的会开得太久了，差点没赶上接糯糯放学。不过最后还是赶到了！');
+  await wait(1000);
+
+  addTyping(); await wait(800); removeTyping();
+  await addMsg('ai', '妈妈也有小刺呀！但还是赶到了——说明小刺扎不倒我们！🌵💪');
+  await wait(800);
+
+  // ═══════════ 🌱 BUD ROUND ═══════════
+  addDivider('🌱 种一颗小芽');
+  showPhase('🌱 第三轮 · 明天最期待的事');
+  await wait(400);
+
+  addTyping(); await wait(600); removeTyping();
+  await addMsg('ai', '最后一颗！种一颗小芽🌱——明天你最期待什么？<br><br>糯糯！');
+  await wait(2200);
+
+  await addMsg('child', '明天奶奶要带我去看金鱼！大大的金鱼！红色的！', { emoji: '🌱' });
+  await wait(800);
+
+  addTyping(); await wait(600); removeTyping();
+  await addMsg('ai', '红色的大金鱼！🐠 明天记得跟我说你看到了几条金鱼好不好？<br><br>妈妈呢？明天的小芽🌱是什么？');
+  await wait(2000);
+
+  await addMsg('parent', '妈妈明天打算把糯糯捡的那片金色叶子做成一个书签，给她一个小惊喜 ☺️');
+  await wait(800);
+
+  addTyping(); await wait(600); removeTyping();
+  await addMsg('ai', '嘘🤫——糯糯没听到哦～这是妈妈和星仔的小秘密！');
+  await wait(600);
+
+  await addMsg('child', '什么秘密！我听到了！什么书签！', { emoji: '😄' });
+  await wait(600);
+
+  addTyping(); await wait(500); removeTyping();
+  await addMsg('ai', '哈哈，被发现了！那就明天等着看吧～🤭');
+  await wait(800);
+
+  // ═══════════ 💛 I NOTICED ═══════════
+  addDivider('💛 妈妈的发现');
+  showPhase('💛 妈妈有话想说');
+  await wait(400);
+
+  addTyping(); await wait(600); removeTyping();
+  await addMsg('ai', '最后一个环节！妈妈，今天有没有注意到糯糯做了什么让你特别感动的事呀？');
+  await wait(2500);
+
+  await addMsg('parent', '糯糯捡到那片叶子的时候，第一件事就是小心地放进口袋里，说要带回家给妈妈看。宝贝真的好贴心 🥹', { emoji: '💛' });
+  await wait(1000);
+
+  addTyping(); await wait(800); removeTyping();
+  await addMsg('ai', '糯糯你听到了吗？你想把最漂亮的叶子给妈妈——妈妈一直都看在眼里呢。你们的花园今天种满了！🌹🌵🌱✨');
+  await wait(1000);
+
+  // ═══════════ 🌙 HOOK FOR TOMORROW ═══════════
+  addDivider('🌙 晚安');
+
+  addTyping(); await wait(800); removeTyping();
+  await addMsg('ai', '今天的花园太丰富了！我要把今天的故事画成一幅画 🎨<br><br>不过呢...画画需要时间！等你们睡着了，我慢慢画～<br><br>明天早上起来，去妈妈的 <b>成长日记</b> 里看，会有一个 ✨惊喜✨ 在等你哦！');
+  await wait(1000);
+
+  await addMsg('child', '什么惊喜！我想现在看！', { emoji: '🌙' });
+  await wait(600);
+
+  addTyping(); await wait(500); removeTyping();
+  await addMsg('ai', '不行哦～要睡着了才能画！你越快睡着，我就越快画好！🤭<br><br>妈妈来跟糯糯说晚安吧～🌙');
+  await wait(2000);
+
+  await addMsg('parent', '晚安宝贝，妈妈最爱你。明天看了金鱼回来跟我讲讲好不好？', { emoji: '💛' });
+  await wait(800);
+
+  await addMsg('child', '好！晚安妈妈！晚安星仔！', { emoji: '🌙' });
+  await wait(800);
+
+  addTyping(); await wait(600); removeTyping();
+  await addMsg('ai', '晚安糯糯～带着今天种的星星，做个好梦！🌙✨ 明天见！');
+  await wait(600);
+
+  // Final buttons
+  updateBottom('今晚的星星种好啦 🌟', [
+    { label: '📔 查看日记', cls: 'action-btn-primary', onclick: 'showJournal()' },
+    { label: '🔄 重播', cls: 'action-btn-secondary', onclick: 'location.reload()' }
+  ]);
+}
+</script>
+</body>
+</html>

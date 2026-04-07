@@ -1,0 +1,71 @@
+<svg width="393" height="852" viewBox="0 0 393 852" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="phone3"><rect width="393" height="852" rx="44"/></clipPath>
+  </defs>
+  <rect width="393" height="852" rx="44" fill="#1A1A2E"/>
+  <g clip-path="url(#phone3)">
+    <rect width="393" height="852" fill="#F8F5EF"/>
+
+    <!-- Status bar -->
+    <text x="36" y="44" font-family="PingFang SC, sans-serif" font-size="15" font-weight="600" fill="#000">9:41</text>
+    <g transform="translate(316,32)"><rect x="0" y="7" width="3" height="5" rx=".5" fill="#000"/><rect x="4" y="4" width="3" height="8" rx=".5" fill="#000"/><rect x="8" y="2" width="3" height="10" rx=".5" fill="#000"/><rect x="12" y="0" width="3" height="12" rx=".5" fill="#000"/></g>
+    <g transform="translate(338,32)"><path d="M8 2.5C10.7 2.5 13 3.8 14.5 6L13 7.5C11.8 5.8 10 4.5 8 4.5C6 4.5 4.2 5.8 3 7.5L1.5 6C3 3.8 5.3 2.5 8 2.5Z" fill="#000"/><circle cx="8" cy="10" r="1.5" fill="#000"/></g>
+    <g transform="translate(358,32)"><rect x="0" y="1" width="21" height="10" rx="2" stroke="#000" stroke-width="1" fill="none"/><rect x="22" y="4" width="2" height="4" rx=".5" fill="#000"/><rect x="1.5" y="2.5" width="18" height="7.5" rx="1" fill="#000"/></g>
+
+    <!-- Top bar -->
+    <path d="M28 74L22 80L28 86" stroke="#282737" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="52" y="84" font-family="PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#282737">亲子互动空间</text>
+
+    <!-- Header -->
+    <text x="24" y="130" font-family="PingFang SC, sans-serif" font-size="22" font-weight="600" fill="#282737">🌱 糯糯的成长旅程</text>
+    <text font-family="PingFang SC, sans-serif" font-size="14" fill="#424245">
+      <tspan x="24" y="156">正在进行 </tspan><tspan fill="#7168D6" font-weight="600">1</tspan><tspan> 个互动活动</tspan>
+    </text>
+
+    <!-- Section: 进行中 -->
+    <text x="24" y="196" font-family="PingFang SC, sans-serif" font-size="13" fill="rgba(53,46,38,0.35)">进行中</text>
+
+    <!-- ═══ CARD: 睡前故事 (only active) ═══ -->
+    <rect x="16" y="216" width="361" height="120" rx="20" fill="#fff"/>
+    <rect x="32" y="232" width="48" height="48" rx="14" fill="#2D5A27"/>
+    <text x="56" y="264" font-family="PingFang SC, sans-serif" font-size="24" text-anchor="middle">📖</text>
+    <text x="96" y="252" font-family="PingFang SC, sans-serif" font-size="16" font-weight="500" fill="#282737">睡前故事</text>
+    <text x="96" y="272" font-family="PingFang SC, sans-serif" font-size="13" fill="#424245">每天讲一个故事，培养想象力</text>
+    <circle cx="354" cy="264" r="4" fill="#52C97A"/>
+    <rect x="96" y="286" width="132" height="22" rx="11" fill="#EFEEFC"/>
+    <text x="104" y="301" font-family="PingFang SC, sans-serif" font-size="11" fill="#7168D6">⏰ 每晚 19:30 ~ 20:00</text>
+    <rect x="236" y="286" width="62" height="22" rx="11" fill="rgba(82,201,122,0.1)"/>
+    <text x="244" y="301" font-family="PingFang SC, sans-serif" font-size="11" fill="#2EA44F">本周 5 次</text>
+
+    <!-- Explore -->
+    <text x="196" y="374" font-family="PingFang SC, sans-serif" font-size="14" fill="#7168D6" text-anchor="middle">探索更多活动  ›</text>
+
+    <!-- Section: 已停止 -->
+    <text x="24" y="420" font-family="PingFang SC, sans-serif" font-size="13" fill="rgba(53,46,38,0.35)">已停止</text>
+
+    <!-- ═══ STOPPED CARD: 种星星 (swiped showing resume) ═══ -->
+    <!-- Resume action behind -->
+    <rect x="307" y="440" width="70" height="110" rx="0" fill="#52C97A"/>
+    <rect x="347" y="440" width="30" height="110" rx="20" fill="#52C97A"/>
+    <!-- Play icon -->
+    <polygon points="332,478 346,486 332,494" stroke="#fff" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+    <text x="339" y="512" font-family="PingFang SC, sans-serif" font-size="12" fill="#fff" text-anchor="middle">恢复</text>
+
+    <!-- Stopped card (shifted left slightly to show resume) -->
+    <rect x="16" y="440" width="345" height="110" rx="20" fill="#fff"/>
+    <!-- Star icon (dimmed) -->
+    <rect x="32" y="456" width="48" height="48" rx="14" fill="#1A1535" opacity="0.4"/>
+    <text x="56" y="488" font-family="PingFang SC, sans-serif" font-size="24" text-anchor="middle" opacity="0.5">🌟</text>
+    <!-- Text (dimmed) -->
+    <text x="96" y="478" font-family="PingFang SC, sans-serif" font-size="16" font-weight="500" fill="#282737" opacity="0.6">种星星</text>
+    <text x="96" y="498" font-family="PingFang SC, sans-serif" font-size="13" fill="#424245" opacity="0.6">睡前亲子情绪表达互动</text>
+    <!-- Paused dot -->
+    <circle cx="340" cy="478" r="4" fill="#CCC"/>
+    <!-- Stopped tag -->
+    <rect x="96" y="510" width="52" height="22" rx="11" fill="rgba(0,0,0,0.06)"/>
+    <text x="104" y="525" font-family="PingFang SC, sans-serif" font-size="11" fill="#999">已停止</text>
+
+    <!-- Home indicator -->
+    <rect x="130" y="836" width="134" height="5" rx="2.5" fill="#000" opacity=".12"/>
+  </g>
+</svg>

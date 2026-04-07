@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>梨谱 · 首页</title>
+<style>
+:root {
+  --bg: #F8F5EF;
+  --font: "PingFang SC", -apple-system, "Noto Sans SC", sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body {
+  height: 100%; background: #E8E4DD;
+  font-family: var(--font); overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══ PHONE ═══ */
+.phone {
+  width: 393px; height: 852px;
+  background: #9CB9CA; border-radius: 44px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 0 0 8px #1A1A2E, 0 0 0 10px #2A2A45, 0 24px 80px rgba(0,0,0,0.35);
+}
+
+/* Background */
+.home-bg {
+  position: absolute; inset: 0; z-index: 0;
+}
+.home-bg img {
+  width: 100%; height: 100%; display: block; object-fit: fill;
+}
+
+/* Top Bar gradient overlay */
+.top-gradient {
+  position: absolute; top: 0; left: 0; right: 0; height: 222px;
+  background: linear-gradient(180deg, rgba(248,245,239,1) 0%, rgba(248,245,239,0) 100%);
+  z-index: 1;
+}
+
+/* Status bar */
+.status-bar {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 54px; padding: 14px 28px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 15px; font-weight: 600; color: #000;
+  z-index: 10;
+}
+
+/* Top Bar buttons */
+.top-bar-content {
+  position: absolute; top: 66px; left: 19px; right: 25px;
+  height: 156px; z-index: 10;
+}
+
+/* Row 1: Switch to child mode */
+.switch-btn {
+  position: absolute; left: 3px; top: 0;
+  cursor: pointer; border: none; background: none; padding: 0;
+  transition: transform .2s;
+}
+.switch-btn:active { transform: scale(.96); }
+.switch-btn img { height: 44px; display: block; }
+
+/* User + Dairy buttons (right column) */
+.right-btns {
+  position: absolute; right: 0; top: 0;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.icon-m {
+  width: 44px; height: 44px; border-radius: 999px;
+  cursor: pointer; border: none; padding: 0;
+  background: rgba(0,0,0,0.25); backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s;
+  overflow: hidden;
+}
+.icon-m:active { transform: scale(.92); }
+.icon-m img { width: 44px; height: 44px; display: block; }
+
+/* Primary seedling button */
+.primary-btn {
+  width: 44px; height: 44px; border-radius: 999px;
+  cursor: pointer; border: none; padding: 0;
+  background: rgba(0,0,0,0.25); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s;
+  overflow: hidden;
+}
+.primary-btn:active { transform: scale(.92); }
+.primary-btn img { width: 44px; height: 44px; display: block; }
+
+/* Bottom action bar */
+.action-bar {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 156px; z-index: 10;
+}
+.action-bar-inner {
+  position: absolute; left: 32px; top: 16px;
+  display: flex; align-items: center; gap: 77px;
+}
+.action-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 0;
+}
+.action-btn {
+  width: 56px; height: 56px; border-radius: 999px;
+  background: rgba(0,0,0,0.25); backdrop-filter: blur(16px);
+  cursor: pointer; border: none; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s;
+  overflow: hidden;
+}
+.action-btn:active { transform: scale(.92); }
+.action-btn img { width: 56px; height: 56px; display: block; object-fit: contain; }
+
+.ai-label {
+  position: absolute; left: 32px; top: 113px;
+  font-size: 10px; font-weight: 500; line-height: 1.3;
+  color: rgba(53, 46, 38, 0.2);
+  width: 329px; text-align: center;
+  opacity: 0.8;
+}
+
+/* Home indicator */
+.home-indicator {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 34px; display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+}
+.home-bar {
+  width: 134px; height: 5px;
+  background: #000; opacity: .12; border-radius: 100px;
+}
+
+/* Entrance animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.switch-btn { animation: fadeUp .5s ease .1s both; }
+.right-btns { animation: fadeUp .5s ease .2s both; }
+.action-bar-inner { animation: fadeUp .5s ease .3s both; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <!-- Background illustration -->
+  <div class="home-bg">
+    <img src="assets/home-bg-correct-30c27a.png" alt="首页背景">
+  </div>
+
+  <!-- Top gradient -->
+  <div class="top-gradient"></div>
+
+  <!-- Status bar -->
+  <div class="status-bar">
+    <span>9:41</span>
+    <span style="font-size:12px; display:flex; gap:4px; align-items:center;">
+      <svg width="16" height="12" viewBox="0 0 16 12"><rect x="0" y="7" width="3" height="5" rx=".5" fill="#000"/><rect x="4" y="4" width="3" height="8" rx=".5" fill="#000"/><rect x="8" y="2" width="3" height="10" rx=".5" fill="#000"/><rect x="12" y="0" width="3" height="12" rx=".5" fill="#000"/></svg>
+      <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.5C10.7 2.5 13 3.8 14.5 6L13 7.5C11.8 5.8 10 4.5 8 4.5C6 4.5 4.2 5.8 3 7.5L1.5 6C3 3.8 5.3 2.5 8 2.5Z" fill="#000"/><circle cx="8" cy="10" r="1.5" fill="#000"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2" stroke="#000" stroke-width="1" fill="none"/><rect x="22" y="4" width="2" height="4" rx=".5" fill="#000"/><rect x="1.5" y="2.5" width="18" height="7.5" rx="1" fill="#000"/></svg>
+    </span>
+  </div>
+
+  <!-- Top bar content -->
+  <div class="top-bar-content">
+    <!-- Switch to child mode -->
+    <button class="switch-btn" onclick="showToast('切换到孩子模式')">
+      <img src="assets/home-switch-child.png" alt="切换到孩子模式">
+    </button>
+
+    <!-- Right column: User, Dairy, Primary -->
+    <div class="right-btns">
+      <button class="icon-m" onclick="showToast('个人中心')">
+        <img src="assets/home-btn-user.png" alt="用户">
+      </button>
+      <button class="icon-m" onclick="showToast('日记')">
+        <img src="assets/home-btn-dairy.png" alt="日记">
+      </button>
+      <button class="primary-btn" onclick="window.location.href='interaction-space.html'" title="亲子活动空间">
+        <img src="assets/home-btn-primary.png" alt="亲子活动空间">
+      </button>
+    </div>
+  </div>
+
+  <!-- Bottom action bar -->
+  <div class="action-bar">
+    <div class="action-bar-inner">
+      <div class="action-row">
+        <button class="action-btn" onclick="window.location.href='task-intro.html'" title="文字对话">
+          <img src="assets/home-btn-chat.png" alt="文字对话">
+        </button>
+      </div>
+      <div class="action-row">
+        <button class="action-btn" onclick="showToast('语音通话')">
+          <img src="assets/home-btn-call.png" alt="语音通话">
+        </button>
+      </div>
+    </div>
+    <div class="ai-label">內容由 AI 生成</div>
+  </div>
+
+  <div class="home-indicator"><div class="home-bar"></div></div>
+
+  <!-- Toast -->
+  <div id="toast" style="position:absolute;bottom:120px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(40,39,55,0.9);color:#fff;border-radius:12px;padding:10px 20px;font-size:14px;opacity:0;transition:all .3s;pointer-events:none;z-index:200;white-space:nowrap;"></div>
+</div>
+
+<script>
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.opacity = '1';
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  setTimeout(() => {
+    t.style.opacity = '0';
+    t.style.transform = 'translateX(-50%) translateY(20px)';
+  }, 2000);
+}
+</script>
+</body>
+</html>

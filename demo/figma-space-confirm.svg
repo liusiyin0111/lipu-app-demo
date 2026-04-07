@@ -1,0 +1,71 @@
+<svg width="393" height="852" viewBox="0 0 393 852" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="phone2"><rect width="393" height="852" rx="44"/></clipPath>
+  </defs>
+  <rect width="393" height="852" rx="44" fill="#1A1A2E"/>
+  <g clip-path="url(#phone2)">
+    <rect width="393" height="852" fill="#F8F5EF"/>
+
+    <!-- Status bar -->
+    <text x="36" y="44" font-family="PingFang SC, sans-serif" font-size="15" font-weight="600" fill="#000">9:41</text>
+    <g transform="translate(316,32)"><rect x="0" y="7" width="3" height="5" rx=".5" fill="#000"/><rect x="4" y="4" width="3" height="8" rx=".5" fill="#000"/><rect x="8" y="2" width="3" height="10" rx=".5" fill="#000"/><rect x="12" y="0" width="3" height="12" rx=".5" fill="#000"/></g>
+    <g transform="translate(338,32)"><path d="M8 2.5C10.7 2.5 13 3.8 14.5 6L13 7.5C11.8 5.8 10 4.5 8 4.5C6 4.5 4.2 5.8 3 7.5L1.5 6C3 3.8 5.3 2.5 8 2.5Z" fill="#000"/><circle cx="8" cy="10" r="1.5" fill="#000"/></g>
+    <g transform="translate(358,32)"><rect x="0" y="1" width="21" height="10" rx="2" stroke="#000" stroke-width="1" fill="none"/><rect x="22" y="4" width="2" height="4" rx=".5" fill="#000"/><rect x="1.5" y="2.5" width="18" height="7.5" rx="1" fill="#000"/></g>
+
+    <!-- Top bar -->
+    <path d="M28 74L22 80L28 86" stroke="#282737" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="52" y="84" font-family="PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#282737">亲子互动空间</text>
+
+    <!-- Header -->
+    <text x="24" y="130" font-family="PingFang SC, sans-serif" font-size="22" font-weight="600" fill="#282737">🌱 糯糯的成长旅程</text>
+    <text font-family="PingFang SC, sans-serif" font-size="14" fill="#424245">
+      <tspan x="24" y="156">正在进行 </tspan><tspan fill="#7168D6" font-weight="600">2</tspan><tspan> 个互动活动</tspan>
+    </text>
+
+    <!-- Section label -->
+    <text x="24" y="196" font-family="PingFang SC, sans-serif" font-size="13" fill="rgba(53,46,38,0.35)">进行中</text>
+
+    <!-- Card 1: Normal -->
+    <rect x="16" y="216" width="361" height="120" rx="20" fill="#fff"/>
+    <rect x="32" y="232" width="48" height="48" rx="14" fill="#1A1535"/>
+    <text x="56" y="264" font-family="PingFang SC, sans-serif" font-size="24" text-anchor="middle">🌟</text>
+    <text x="96" y="252" font-family="PingFang SC, sans-serif" font-size="16" font-weight="500" fill="#282737">种星星</text>
+    <text x="96" y="272" font-family="PingFang SC, sans-serif" font-size="13" fill="#424245">睡前亲子情绪表达互动</text>
+    <circle cx="354" cy="264" r="4" fill="#52C97A"/>
+
+    <!-- Card 2 (partially visible) -->
+    <rect x="16" y="348" width="361" height="120" rx="20" fill="#fff" opacity="0.4"/>
+    <rect x="32" y="364" width="48" height="48" rx="14" fill="#2D5A27" opacity="0.4"/>
+    <circle cx="354" cy="396" r="4" fill="#52C97A" opacity="0.4"/>
+
+    <!-- ═══ DARK OVERLAY ═══ -->
+    <rect width="393" height="852" fill="#000" opacity="0.5"/>
+
+    <!-- ═══ DIALOG BOX ═══ -->
+    <rect x="47" y="310" width="300" height="230" rx="20" fill="#fff"/>
+
+    <!-- Pause icon -->
+    <rect x="176" y="338" width="42" height="42" rx="10" fill="#3478F6"/>
+    <rect x="189" y="348" width="5" height="22" rx="2" fill="#fff"/>
+    <rect x="200" y="348" width="5" height="22" rx="2" fill="#fff"/>
+
+    <!-- Title -->
+    <text x="197" y="408" font-family="PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#282737" text-anchor="middle">确定停止"种星星"？</text>
+
+    <!-- Description -->
+    <text font-family="PingFang SC, sans-serif" font-size="14" fill="#424245" text-anchor="middle">
+      <tspan x="197" y="436">停止后星仔不再主动邀请，</tspan>
+      <tspan x="197" y="456">你可以随时重新开启。</tspan>
+    </text>
+
+    <!-- Buttons -->
+    <rect x="67" y="478" width="130" height="44" rx="12" fill="#F3F3F3"/>
+    <text x="132" y="506" font-family="PingFang SC, sans-serif" font-size="15" fill="#424245" text-anchor="middle">再想想</text>
+
+    <rect x="207" y="478" width="120" height="44" rx="12" fill="#E05050"/>
+    <text x="267" y="506" font-family="PingFang SC, sans-serif" font-size="15" fill="#fff" text-anchor="middle">确定停止</text>
+
+    <!-- Home indicator -->
+    <rect x="130" y="836" width="134" height="5" rx="2.5" fill="#000" opacity=".12"/>
+  </g>
+</svg>
